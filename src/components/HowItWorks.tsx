@@ -1,82 +1,33 @@
 import ScrollReveal from "./ScrollReveal";
 
 const steps = [
-  {
-    number: "01",
-    title: "Audit",
-    description:
-      "We map your workflows and identify the 3 biggest time-wasters. Free, no strings attached.",
-    accent: "from-teal to-teal/50",
-  },
-  {
-    number: "02",
-    title: "Demo",
-    description:
-      "We build a working prototype in 7-14 days. You see it running with your real data before you pay.",
-    accent: "from-sea to-sea/50",
-  },
-  {
-    number: "03",
-    title: "Build",
-    description:
-      "Once approved, we deploy the full solution. Clear scope, fixed price, no surprises.",
-    accent: "from-teal to-sea/50",
-  },
-  {
-    number: "04",
-    title: "Optimize",
-    description:
-      "Monthly retainer keeps things running, improving, and scaling as your business grows.",
-    accent: "from-amber to-amber/50",
-  },
+  { number: "01", title: "Audit", desc: "We map your workflows and identify the 3 biggest time-wasters. Free, no strings attached." },
+  { number: "02", title: "Demo", desc: "We build a working prototype in 7–14 days. You see it running with your real data before you pay." },
+  { number: "03", title: "Build", desc: "Once approved, we deploy the full solution. Clear scope, fixed price, no surprises." },
+  { number: "04", title: "Optimize", desc: "Monthly retainer keeps things running, improving, and scaling as your business grows." },
 ];
 
 export default function HowItWorks() {
   return (
-    <section
-      id="how-it-works"
-      className="relative section-padding bg-navy-light noise"
-    >
-      <div className="relative z-10 max-w-6xl mx-auto">
+    <section id="process" className="section">
+      <div className="container">
         <ScrollReveal>
-          <div className="text-center mb-16">
-            <span className="text-teal text-xs tracking-[0.25em] uppercase font-semibold">
-              Process
-            </span>
-            <h2 className="font-display font-bold text-3xl md:text-4xl lg:text-5xl text-white mt-4 mb-6">
-              How it works.
-            </h2>
-            <p className="text-muted text-lg max-w-xl mx-auto">
-              From first call to live automation in under a month. No fluff, no
-              committees, no waiting.
+          <div className="section-header section-header--center">
+            <div className="overline">Process</div>
+            <h2 className="heading-lg">How it works.</h2>
+            <p className="text-body">
+              From first call to live automation in under a month. No fluff, no committees, no waiting.
             </p>
           </div>
         </ScrollReveal>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="steps-grid">
           {steps.map((step, i) => (
-            <ScrollReveal key={step.number} delay={i * 0.12}>
-              <div className="relative group">
-                {/* Connector line */}
-                {i < steps.length - 1 && (
-                  <div className="hidden lg:block absolute top-8 left-full w-6 h-px bg-gradient-to-r from-white/10 to-transparent z-20" />
-                )}
-
-                <div className="bg-slate/30 border border-white/5 rounded-2xl p-8 h-full card-hover">
-                  <div
-                    className={`inline-flex items-center justify-center w-12 h-12 rounded-xl bg-gradient-to-br ${step.accent} mb-6`}
-                  >
-                    <span className="text-navy-dark font-display font-bold text-sm">
-                      {step.number}
-                    </span>
-                  </div>
-                  <h3 className="font-display font-bold text-xl text-white mb-3">
-                    {step.title}
-                  </h3>
-                  <p className="text-muted text-sm leading-relaxed">
-                    {step.description}
-                  </p>
-                </div>
+            <ScrollReveal key={step.number} delay={i * 0.1}>
+              <div className="step-card">
+                <div className="step-number">{step.number}</div>
+                <h3 className="heading-md">{step.title}</h3>
+                <p>{step.desc}</p>
               </div>
             </ScrollReveal>
           ))}
