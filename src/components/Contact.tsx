@@ -1,15 +1,31 @@
 "use client";
 
+import dynamic from "next/dynamic";
 import ScrollReveal, { StaggerReveal } from "./ScrollReveal";
 import { MotionButton } from "./Motion";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { MessageCircle } from "lucide-react";
 
+const Globe = dynamic(() => import("./Globe"), { ssr: false });
+
 export default function Contact() {
   return (
-    <section id="contact" className="py-24 md:py-36 text-center">
-      <div className="container">
+    <section id="contact" className="py-24 md:py-36 text-center relative overflow-hidden">
+      {/* Globe behind content */}
+      <div className="absolute inset-0 z-0 flex items-center justify-center opacity-40 pointer-events-none">
+        <div className="w-[600px] h-[600px] md:w-[800px] md:h-[800px]">
+          <Globe />
+        </div>
+      </div>
+
+      {/* Fade overlays to blend globe */}
+      <div className="absolute inset-0 z-[1] pointer-events-none">
+        <div className="absolute top-0 inset-x-0 h-[30%] bg-gradient-to-b from-background to-transparent" />
+        <div className="absolute bottom-0 inset-x-0 h-[30%] bg-gradient-to-t from-background to-transparent" />
+      </div>
+
+      <div className="container relative z-10">
         <ScrollReveal>
           <div className="max-w-[600px] mx-auto">
             <div className="flex items-center justify-center gap-2.5 mb-4">
