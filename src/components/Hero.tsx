@@ -1,33 +1,17 @@
 "use client";
 
-import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { MessageCircle } from "lucide-react";
 
 export default function Hero() {
   return (
     <section className="relative min-h-dvh flex items-center justify-center overflow-hidden">
-      {/* Background image */}
-      <div className="absolute inset-0 z-0">
-        <Image
-          src="/hero-bg.jpg"
-          alt=""
-          fill
-          priority
-          className="object-cover object-center scale-[1.02]"
-          sizes="100vw"
-          quality={100}
-        />
-      </div>
-
-      {/* Overlay — just enough to keep text readable */}
-      <div className="absolute inset-0 z-[1] bg-background/40" />
-      <div className="absolute top-0 inset-x-0 h-40 z-[1] bg-gradient-to-b from-background to-transparent" />
-      <div className="absolute bottom-0 inset-x-0 h-48 z-[1] bg-gradient-to-t from-background to-transparent" />
-
-      {/* Subtle gold glow */}
-      <div className="absolute inset-0 z-[2] pointer-events-none">
-        <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[600px] h-[400px] bg-[radial-gradient(ellipse_at_center,rgba(212,160,6,0.04)_0%,transparent_70%)]" />
+      {/* Hero-specific glow orbs */}
+      <div className="absolute inset-0 z-0 pointer-events-none">
+        <div className="absolute top-[-20%] left-1/2 -translate-x-1/2 w-[1000px] h-[700px] bg-[radial-gradient(ellipse_at_center,rgba(212,160,6,0.1)_0%,transparent_60%)] animate-pulse-glow" />
+        <div className="absolute top-[10%] left-[-10%] w-[600px] h-[600px] bg-[radial-gradient(circle,rgba(194,112,62,0.07)_0%,transparent_60%)]" />
+        <div className="absolute top-[20%] right-[-5%] w-[500px] h-[500px] bg-[radial-gradient(circle,rgba(250,204,21,0.05)_0%,transparent_60%)]" />
+        <div className="absolute bottom-[-15%] left-1/3 w-[800px] h-[500px] bg-[radial-gradient(ellipse_at_center,rgba(180,120,60,0.04)_0%,transparent_60%)]" />
       </div>
 
       <div className="relative z-10 text-center max-w-[720px] px-6 flex flex-col items-center gap-6">
@@ -47,7 +31,7 @@ export default function Hero() {
         </h1>
 
         {/* Sub */}
-        <p className="text-[clamp(0.9375rem,1.5vw,1.0625rem)] leading-relaxed text-warm-200 max-w-[520px] opacity-0 translate-y-5 animate-fade-up [animation-delay:0.4s]">
+        <p className="text-[clamp(0.9375rem,1.5vw,1.0625rem)] leading-relaxed text-warm-300 max-w-[520px] opacity-0 translate-y-5 animate-fade-up [animation-delay:0.4s]">
           AI-powered automations for Egyptian businesses — from WhatsApp bots
           to full operations dashboards. Built in days, not months.
         </p>

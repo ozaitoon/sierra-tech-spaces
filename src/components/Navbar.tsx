@@ -25,7 +25,7 @@ export default function Navbar() {
   return (
     <>
       <div className={`fixed top-0 inset-x-0 z-50 transition-all duration-300 ${scrolled ? "px-4 pt-2" : "px-6 pt-3"}`}>
-        <nav className="max-w-[1120px] mx-auto flex items-center justify-between h-12 bg-warm-900/70 backdrop-blur-xl border border-white/[0.08] rounded-full pl-5 pr-1.5">
+        <nav className="max-w-[1120px] mx-auto flex items-center justify-between h-12 bg-white/[0.04] backdrop-blur-2xl border border-white/[0.07] shadow-[inset_0_0_0_1px_rgba(255,255,255,0.03),0_4px_24px_rgba(0,0,0,0.4)] rounded-full pl-5 pr-1.5">
           <a href="#" className="flex items-center gap-2.5">
             <Image src="/logo.jpeg" alt="STS" width={28} height={28} className="rounded-md" />
             <span className="font-display font-bold text-[0.8125rem] tracking-[0.06em] text-foreground hidden sm:block">
