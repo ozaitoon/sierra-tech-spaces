@@ -53,8 +53,8 @@ export default function Hero() {
         <div data-hero-logo className="mb-8">
           <div className="relative rounded-2xl p-2"
             style={{
-              border: "1.5px solid rgba(212, 160, 6, 0.6)",
-              boxShadow: "0 0 15px rgba(212, 160, 6, 0.25), 0 0 40px rgba(212, 160, 6, 0.1), 0 0 2px rgba(250, 204, 21, 0.4), inset 0 0 15px rgba(212, 160, 6, 0.06)",
+              border: "1.5px solid rgba(139, 92, 246, 0.6)",
+              boxShadow: "0 0 15px rgba(139, 92, 246, 0.25), 0 0 40px rgba(139, 92, 246, 0.1), 0 0 2px rgba(167, 139, 250, 0.4), inset 0 0 15px rgba(139, 92, 246, 0.06)",
             }}
           >
             <Image

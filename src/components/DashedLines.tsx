@@ -27,7 +27,7 @@ function Lines({ count = 70 }: { count?: number }) {
       }
 
       const geo = new THREE.BufferGeometry().setFromPoints(points);
-      const colors = ["#D4A006", "#C2703E", "#FACC15", "#B88B05"];
+      const colors = ["#8B5CF6", "#EC4899", "#A78BFA", "#7C3AED"];
       const color = colors[Math.floor(Math.random() * colors.length)];
       result.push({ geo, color });
     }

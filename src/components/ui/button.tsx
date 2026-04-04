@@ -7,7 +7,7 @@ const buttonVariants = cva(
   {
     variants: {
       variant: {
-        default: "bg-gold/90 backdrop-blur-xl text-primary-foreground hover:bg-gold-light shadow-[0_0_25px_rgba(212,160,6,0.25),0_0_60px_rgba(212,160,6,0.08),inset_0_1px_0_rgba(255,255,255,0.15)]",
+        default: "bg-gold/90 backdrop-blur-xl text-primary-foreground hover:bg-gold-light shadow-[0_0_25px_rgba(139,92,246,0.25),0_0_60px_rgba(139,92,246,0.08),inset_0_1px_0_rgba(255,255,255,0.15)]",
         secondary: "backdrop-blur-xl bg-white/[0.04] border border-white/[0.1] text-foreground hover:border-white/[0.18] hover:bg-white/[0.07] shadow-[0_0_15px_rgba(255,255,255,0.02),inset_0_1px_0_rgba(255,255,255,0.06)]",
         ghost: "text-muted-foreground hover:text-foreground hover:bg-white/[0.06] backdrop-blur-lg",
         destructive: "bg-destructive/80 backdrop-blur-xl text-foreground hover:bg-destructive/90",

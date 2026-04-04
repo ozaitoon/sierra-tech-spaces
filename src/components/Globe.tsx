@@ -36,7 +36,7 @@ function SurfaceDots({ count = 200, radius = 1.52 }: { count?: number; radius?: 
       <bufferGeometry>
         <bufferAttribute attach="attributes-position" args={[positions, 3]} />
       </bufferGeometry>
-      <pointsMaterial color="#D4A006" size={0.02} transparent opacity={0.7} sizeAttenuation />
+      <pointsMaterial color="#8B5CF6" size={0.02} transparent opacity={0.7} sizeAttenuation />
     </points>
   );
 }
@@ -82,7 +82,7 @@ function ConnectionArcs({ count = 12, radius = 1.52 }: { count?: number; radius?
     <group ref={groupRef}>
       {arcs.map((geo, i) => (
         <line_ key={i} geometry={geo}>
-          <lineBasicMaterial color="#D4A006" transparent opacity={0.15} />
+          <lineBasicMaterial color="#8B5CF6" transparent opacity={0.15} />
         </line_>
       ))}
     </group>
@@ -101,15 +101,15 @@ function Rings() {
       {/* Saturn-style rings */}
       <mesh rotation={[Math.PI / 2.5, 0, 0.15]}>
         <ringGeometry args={[2.0, 2.15, 80]} />
-        <meshBasicMaterial color="#D4A006" transparent opacity={0.1} side={THREE.DoubleSide} />
+        <meshBasicMaterial color="#8B5CF6" transparent opacity={0.1} side={THREE.DoubleSide} />
       </mesh>
       <mesh rotation={[Math.PI / 2.5, 0, 0.15]}>
         <ringGeometry args={[2.25, 2.35, 80]} />
-        <meshBasicMaterial color="#C2703E" transparent opacity={0.06} side={THREE.DoubleSide} />
+        <meshBasicMaterial color="#EC4899" transparent opacity={0.06} side={THREE.DoubleSide} />
       </mesh>
       <mesh rotation={[Math.PI / 2.5, 0, 0.15]}>
         <ringGeometry args={[2.45, 2.52, 80]} />
-        <meshBasicMaterial color="#FACC15" transparent opacity={0.04} side={THREE.DoubleSide} />
+        <meshBasicMaterial color="#A78BFA" transparent opacity={0.04} side={THREE.DoubleSide} />
       </mesh>
     </group>
   );
@@ -125,7 +125,7 @@ function WireframeGlobe() {
   return (
     <mesh ref={ref}>
       <sphereGeometry args={[1.5, 32, 24]} />
-      <meshBasicMaterial color="#D4A006" wireframe transparent opacity={0.08} />
+      <meshBasicMaterial color="#8B5CF6" wireframe transparent opacity={0.08} />
     </mesh>
   );
 }

@@ -43,7 +43,7 @@ function LODField() {
 
   const objects = useMemo(() => {
     const items: { position: [number, number, number]; color: string }[] = [];
-    const colors = ["#D4A006", "#C2703E", "#FACC15", "#B88B05", "#D4A006"];
+    const colors = ["#8B5CF6", "#EC4899", "#A78BFA", "#7C3AED", "#8B5CF6"];
     for (let i = 0; i < 30; i++) {
       items.push({
         position: [

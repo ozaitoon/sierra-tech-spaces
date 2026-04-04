@@ -47,7 +47,7 @@ function Terrain() {
   return (
     <mesh ref={meshRef} geometry={geometry} rotation={[-Math.PI / 2.8, 0, 0]} position={[0, -2, 0]}>
       <meshStandardMaterial
-        color="#D4A006"
+        color="#8B5CF6"
         wireframe
         transparent
         opacity={0.25}
@@ -64,8 +64,8 @@ export default function TerrainScene() {
       style={{ background: "transparent" }}
     >
       <ambientLight intensity={0.3} />
-      <directionalLight position={[5, 10, 5]} intensity={1} color="#D4A006" />
-      <pointLight position={[-5, 5, -5]} intensity={0.5} color="#FACC15" />
+      <directionalLight position={[5, 10, 5]} intensity={1} color="#8B5CF6" />
+      <pointLight position={[-5, 5, -5]} intensity={0.5} color="#A78BFA" />
       <Terrain />
     </Canvas>
   );

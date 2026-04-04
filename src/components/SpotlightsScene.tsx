@@ -80,9 +80,9 @@ export default function SpotlightsScene() {
       style={{ background: "transparent" }}
     >
       <ambientLight intensity={0.05} />
-      <MovingSpotlight color="#D4A006" position={[-3, 6, 3]} speed={0.7} radius={3} />
-      <MovingSpotlight color="#C2703E" position={[3, 6, -3]} speed={0.5} radius={4} />
-      <MovingSpotlight color="#FACC15" position={[0, 6, 4]} speed={0.9} radius={2.5} />
+      <MovingSpotlight color="#8B5CF6" position={[-3, 6, 3]} speed={0.7} radius={3} />
+      <MovingSpotlight color="#EC4899" position={[3, 6, -3]} speed={0.5} radius={4} />
+      <MovingSpotlight color="#A78BFA" position={[0, 6, 4]} speed={0.9} radius={2.5} />
       <CenterSphere />
       <Floor />
     </Canvas>
