@@ -8,7 +8,7 @@ export default function Footer() {
       <div className="container py-8">
         <div className="flex flex-col md:flex-row items-center justify-between gap-5">
           <div className="flex items-center gap-2.5">
-            <Image src="/logo.jpeg" alt="STS" width={28} height={28} className="rounded-md" />
+            <Image src="/logo-gold.png" alt="STS" width={28} height={28} className="rounded-md" />
             <div className="flex flex-col">
               <span className="font-display font-bold text-[0.75rem] tracking-[0.05em] text-foreground">
                 SIERRA TECH SPACES

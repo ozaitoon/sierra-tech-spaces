@@ -12,7 +12,7 @@ export default function SplineScene() {
       }
     >
       <Spline
-        scene="https://prod.spline.design/XZCxJfNp8MvZ0OaO/scene.splinecode"
+        scene="https://prod.spline.design/f3VDjPKfFysaOA1J/scene.splinecode"
         style={{ width: "100%", height: "100%" }}
       />
     </Suspense>

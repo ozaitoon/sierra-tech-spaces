@@ -1,21 +1,23 @@
 import type { Metadata } from "next";
-import { Alumni_Sans, DM_Sans } from "next/font/google";
+import { Space_Grotesk, Inter } from "next/font/google";
 import "./globals.css";
 
-const alumniSans = Alumni_Sans({
+const spaceGrotesk = Space_Grotesk({
   subsets: ["latin"],
-  variable: "--font-syne",
+  variable: "--font-display",
   display: "swap",
+  weight: ["700"],
 });
 
-const dmSans = DM_Sans({
+const inter = Inter({
   subsets: ["latin"],
-  variable: "--font-dm-sans",
+  variable: "--font-body",
   display: "swap",
+  weight: ["300", "400", "500", "600"],
 });
 
 export const metadata: Metadata = {
-  title: "Sierra Tech Spaces — AI That Works As Hard As You Do",
+  title: "Sierra Tech Spaces — We Automate What Slows You Down",
   description:
     "Egypt's AI automation agency. We help businesses save hours, capture leads, and grow revenue with custom AI solutions — delivered in days, not months.",
   keywords: [
@@ -34,7 +36,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${alumniSans.variable} ${dmSans.variable}`}>
+      <body className={`${spaceGrotesk.variable} ${inter.variable}`}>
         {children}
       </body>
     </html>

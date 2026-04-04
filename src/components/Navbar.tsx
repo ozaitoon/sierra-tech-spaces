@@ -34,8 +34,8 @@ export default function Navbar() {
       >
         <nav className="max-w-[1120px] mx-auto flex items-center justify-between h-12 bg-white/[0.04] backdrop-blur-2xl border border-white/[0.07] shadow-[inset_0_0_0_1px_rgba(255,255,255,0.03),0_4px_24px_rgba(0,0,0,0.4)] rounded-full pl-5 pr-1.5">
           <a href="#" className="flex items-center gap-2.5">
-            <Image src="/logo.jpeg" alt="STS" width={28} height={28} className="rounded-md" />
-            <span className="font-display font-bold text-[0.8125rem] tracking-[0.06em] text-foreground hidden sm:block">
+            <Image src="/logo-gold.png" alt="STS" width={28} height={28} className="rounded-md" />
+            <span className="font-display font-bold text-[0.8125rem] tracking-[0.15em] text-foreground hidden sm:block">
               SIERRA TECH
             </span>
           </a>

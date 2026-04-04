@@ -30,9 +30,9 @@ export default function Contact() {
           <div className="max-w-[600px] mx-auto">
             <div className="flex items-center justify-center gap-2.5 mb-4">
               <span className="w-6 h-px bg-gold/50" />
-              <span className="text-xs font-semibold tracking-[0.15em] uppercase text-gold">Get Started</span>
+              <span className="text-xs font-semibold tracking-[0.25em] uppercase text-gold">Get Started</span>
             </div>
-            <h2 className="font-display font-bold text-[clamp(1.75rem,3.5vw,2.5rem)] leading-[1.1] tracking-[-0.025em] text-foreground mb-3.5">
+            <h2 className="font-display font-bold text-[clamp(1.75rem,3.5vw,2.5rem)] leading-[0.95] tracking-[-0.04em] text-foreground mb-3.5">
               Ready to stop wasting{" "}
               <span className="gradient-text">time and money?</span>
             </h2>
@@ -67,10 +67,10 @@ export default function Contact() {
           {[
             { value: "15 min", label: "Free discovery call" },
             { value: "7–14 days", label: "Working prototype" },
-            { value: "EGP 0", label: "Until you see results" },
+            { value: "Free", label: "Until you see results" },
           ].map((s) => (
             <Card key={s.value} className="p-5">
-              <div className="font-display font-bold text-xl text-gold tracking-[-0.02em] mb-0.5">{s.value}</div>
+              <div className="font-display font-bold text-xl text-gold tracking-[-0.04em] mb-0.5">{s.value}</div>
               <div className="text-[0.75rem] text-warm-500">{s.label}</div>
             </Card>
           ))}

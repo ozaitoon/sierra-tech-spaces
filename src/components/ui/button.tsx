@@ -7,12 +7,12 @@ const buttonVariants = cva(
   {
     variants: {
       variant: {
-        default: "bg-primary text-primary-foreground hover:bg-gold-light shadow-[0_0_20px_rgba(212,160,6,0.15)]",
-        secondary: "border border-white/[0.08] text-foreground hover:border-white/[0.14] hover:bg-white/[0.03]",
-        ghost: "text-muted-foreground hover:text-foreground hover:bg-white/[0.06]",
-        destructive: "bg-destructive text-foreground hover:bg-destructive/90",
-        outline: "border border-white/[0.08] bg-transparent text-foreground hover:bg-white/[0.04]",
-        nav: "bg-foreground text-background hover:bg-white",
+        default: "bg-gold/90 backdrop-blur-xl text-primary-foreground hover:bg-gold-light shadow-[0_0_25px_rgba(212,160,6,0.25),0_0_60px_rgba(212,160,6,0.08),inset_0_1px_0_rgba(255,255,255,0.15)]",
+        secondary: "backdrop-blur-xl bg-white/[0.04] border border-white/[0.1] text-foreground hover:border-white/[0.18] hover:bg-white/[0.07] shadow-[0_0_15px_rgba(255,255,255,0.02),inset_0_1px_0_rgba(255,255,255,0.06)]",
+        ghost: "text-muted-foreground hover:text-foreground hover:bg-white/[0.06] backdrop-blur-lg",
+        destructive: "bg-destructive/80 backdrop-blur-xl text-foreground hover:bg-destructive/90",
+        outline: "backdrop-blur-xl border border-white/[0.1] bg-white/[0.03] text-foreground hover:bg-white/[0.06] shadow-[inset_0_1px_0_rgba(255,255,255,0.05)]",
+        nav: "bg-foreground/90 backdrop-blur-xl text-background hover:bg-white shadow-[0_0_15px_rgba(255,255,255,0.08)]",
       },
       size: {
         default: "h-11 px-6 text-[0.875rem]",

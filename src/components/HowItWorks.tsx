@@ -19,9 +19,9 @@ export default function HowItWorks() {
           <div className="text-center max-w-[600px] mx-auto mb-14">
             <div className="flex items-center justify-center gap-2.5 mb-4">
               <span className="w-6 h-px bg-gold/50" />
-              <span className="text-xs font-semibold tracking-[0.15em] uppercase text-gold">Process</span>
+              <span className="text-xs font-semibold tracking-[0.25em] uppercase text-gold">Process</span>
             </div>
-            <h2 className="font-display font-bold text-[clamp(1.75rem,3.5vw,2.5rem)] leading-[1.1] tracking-[-0.025em] text-foreground mb-3.5">
+            <h2 className="font-display font-bold text-[clamp(1.75rem,3.5vw,2.5rem)] leading-[0.95] tracking-[-0.04em] text-foreground mb-3.5">
               How it works.
             </h2>
             <p className="text-[0.9375rem] text-muted-foreground max-w-[480px] mx-auto">
@@ -33,14 +33,14 @@ export default function HowItWorks() {
         <StaggerReveal className="grid sm:grid-cols-2 lg:grid-cols-4 gap-3" stagger={0.12}>
           {steps.map((step) => (
             <MotionCard key={step.num}>
-              <Card className="p-8">
+              <Card className="p-8 h-full">
                 <div className={`inline-flex items-center justify-center w-10 h-10 rounded-[10px] ${step.color} mb-5`}>
                   <span className="font-display font-bold text-xs text-background">{step.num}</span>
                 </div>
-                <h3 className="font-display font-semibold text-[clamp(1.125rem,2vw,1.375rem)] text-foreground tracking-[-0.015em] mb-2.5">
+                <h3 className="font-display font-semibold text-[clamp(1.125rem,2vw,1.375rem)] text-foreground tracking-[-0.04em] mb-2.5">
                   {step.title}
                 </h3>
-                <p className="text-[0.8125rem] text-warm-500 leading-relaxed">{step.desc}</p>
+                <p className="text-[0.8125rem] text-warm-500 leading-[1.8]">{step.desc}</p>
               </Card>
             </MotionCard>
           ))}
