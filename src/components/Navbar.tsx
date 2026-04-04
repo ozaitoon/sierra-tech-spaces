@@ -2,8 +2,10 @@
 
 import { useState, useEffect } from "react";
 import Image from "next/image";
+import { Button } from "@/components/ui/button";
+import { MessageCircle, ArrowUpRight } from "lucide-react";
 
-const navLinks = [
+const links = [
   { label: "Services", href: "#services" },
   { label: "Process", href: "#process" },
   { label: "Why Us", href: "#why" },
@@ -12,69 +14,75 @@ const navLinks = [
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
-  const [mobileOpen, setMobileOpen] = useState(false);
+  const [open, setOpen] = useState(false);
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 60);
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
+    const fn = () => setScrolled(window.scrollY > 60);
+    window.addEventListener("scroll", fn, { passive: true });
+    return () => window.removeEventListener("scroll", fn);
   }, []);
 
   return (
     <>
-      <div className="nav-wrapper" style={scrolled ? { padding: "8px var(--container-pad)" } : undefined}>
-        <nav className="nav-bar">
-          <a href="#" className="nav-logo">
-            <Image src="/logo.jpeg" alt="STS" width={36} height={36} />
-            <span className="nav-logo-text">SIERRA TECH</span>
+      <div className={`fixed top-0 inset-x-0 z-50 transition-all duration-300 ${scrolled ? "px-4 pt-2" : "px-6 pt-3"}`}>
+        <nav className="max-w-[1120px] mx-auto flex items-center justify-between h-12 bg-warm-900/70 backdrop-blur-xl border border-white/[0.08] rounded-full pl-5 pr-1.5">
+          <a href="#" className="flex items-center gap-2.5">
+            <Image src="/logo.jpeg" alt="STS" width={28} height={28} className="rounded-md" />
+            <span className="font-display font-bold text-[0.8125rem] tracking-[0.06em] text-foreground hidden sm:block">
+              SIERRA TECH
+            </span>
           </a>
 
-          <div className="nav-links">
-            {navLinks.map((link) => (
-              <a key={link.href} href={link.href}>
-                {link.label}
+          <div className="hidden md:flex items-center gap-1">
+            {links.map((l) => (
+              <a
+                key={l.href}
+                href={l.href}
+                className="text-[0.8125rem] font-medium text-muted-foreground px-3 py-1.5 rounded-md hover:text-foreground hover:bg-white/[0.06] transition-all duration-150"
+              >
+                {l.label}
               </a>
             ))}
           </div>
 
-          <a
-            href="https://wa.me/201234567890?text=Hi%20Sierra%20Tech%2C%20I%27d%20like%20to%20learn%20more."
-            target="_blank"
-            rel="noopener noreferrer"
-            className="nav-cta"
-          >
-            Get Started
-            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
-              <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 19.5l15-15m0 0H8.25m11.25 0v11.25" />
-            </svg>
-          </a>
+          <div className="flex items-center gap-2">
+            <a href="https://wa.me/201234567890" target="_blank" rel="noopener noreferrer">
+              <Button variant="nav" size="sm" className="gap-1.5">
+                Get Started
+                <ArrowUpRight className="w-3.5 h-3.5" />
+              </Button>
+            </a>
 
-          <button
-            className="mobile-toggle"
-            onClick={() => setMobileOpen(!mobileOpen)}
-            aria-label="Menu"
-          >
-            <span />
-            <span />
-            <span />
-          </button>
+            <button
+              onClick={() => setOpen(!open)}
+              className="md:hidden flex flex-col gap-1 p-2.5"
+              aria-label="Menu"
+            >
+              <span className={`w-[18px] h-[1.5px] bg-foreground rounded transition-all ${open ? "rotate-45 translate-y-[5px]" : ""}`} />
+              <span className={`w-[18px] h-[1.5px] bg-foreground rounded transition-all ${open ? "opacity-0" : ""}`} />
+              <span className={`w-[18px] h-[1.5px] bg-foreground rounded transition-all ${open ? "-rotate-45 -translate-y-[5px]" : ""}`} />
+            </button>
+          </div>
         </nav>
       </div>
 
-      <div className={`mobile-menu ${mobileOpen ? "open" : ""}`}>
-        {navLinks.map((link) => (
-          <a key={link.href} href={link.href} onClick={() => setMobileOpen(false)}>
-            {link.label}
+      {/* Mobile menu */}
+      <div className={`fixed inset-0 z-40 bg-black/95 backdrop-blur-2xl flex flex-col items-center justify-center gap-7 transition-opacity duration-300 ${open ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"}`}>
+        {links.map((l) => (
+          <a
+            key={l.href}
+            href={l.href}
+            onClick={() => setOpen(false)}
+            className="font-display text-xl font-semibold text-muted-foreground hover:text-foreground transition-colors"
+          >
+            {l.label}
           </a>
         ))}
-        <a
-          href="https://wa.me/201234567890"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="btn-primary"
-          onClick={() => setMobileOpen(false)}
-        >
-          Get Started
+        <a href="https://wa.me/201234567890" target="_blank" rel="noopener noreferrer" onClick={() => setOpen(false)}>
+          <Button size="lg" className="mt-2">
+            <MessageCircle className="w-4 h-4" />
+            Chat on WhatsApp
+          </Button>
         </a>
       </div>
     </>

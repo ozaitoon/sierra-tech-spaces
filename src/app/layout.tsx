@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
-import { Syne, DM_Sans } from "next/font/google";
+import { Alumni_Sans, DM_Sans } from "next/font/google";
 import "./globals.css";
 
-const syne = Syne({
+const alumniSans = Alumni_Sans({
   subsets: ["latin"],
   variable: "--font-syne",
   display: "swap",
@@ -33,10 +33,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="scroll-smooth">
-      <body
-        className={`${syne.variable} ${dmSans.variable} font-body antialiased`}
-      >
+    <html lang="en">
+      <body className={`${alumniSans.variable} ${dmSans.variable}`}>
         {children}
       </body>
     </html>
