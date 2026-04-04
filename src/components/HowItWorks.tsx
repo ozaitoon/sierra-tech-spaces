@@ -1,5 +1,8 @@
-import ScrollReveal from "./ScrollReveal";
-import { Card, CardContent } from "@/components/ui/card";
+"use client";
+
+import ScrollReveal, { StaggerReveal } from "./ScrollReveal";
+import { MotionCard } from "./Motion";
+import { Card } from "@/components/ui/card";
 
 const steps = [
   { num: "01", title: "Audit", desc: "We map your workflows and identify the 3 biggest time-wasters. Free, no strings attached.", color: "bg-gold" },
@@ -27,9 +30,9 @@ export default function HowItWorks() {
           </div>
         </ScrollReveal>
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-3">
-          {steps.map((step, i) => (
-            <ScrollReveal key={step.num} delay={i * 0.1}>
+        <StaggerReveal className="grid sm:grid-cols-2 lg:grid-cols-4 gap-3" stagger={0.12}>
+          {steps.map((step) => (
+            <MotionCard key={step.num}>
               <Card className="p-8">
                 <div className={`inline-flex items-center justify-center w-10 h-10 rounded-[10px] ${step.color} mb-5`}>
                   <span className="font-display font-bold text-xs text-background">{step.num}</span>
@@ -39,9 +42,9 @@ export default function HowItWorks() {
                 </h3>
                 <p className="text-[0.8125rem] text-warm-500 leading-relaxed">{step.desc}</p>
               </Card>
-            </ScrollReveal>
+            </MotionCard>
           ))}
-        </div>
+        </StaggerReveal>
       </div>
     </section>
   );

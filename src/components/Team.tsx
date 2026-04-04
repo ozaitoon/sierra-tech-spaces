@@ -1,4 +1,7 @@
-import ScrollReveal from "./ScrollReveal";
+"use client";
+
+import ScrollReveal, { StaggerReveal } from "./ScrollReveal";
+import { MotionCard, PulsingDot } from "./Motion";
 import { Card } from "@/components/ui/card";
 
 const team = [
@@ -26,16 +29,16 @@ export default function Team() {
           </div>
         </ScrollReveal>
 
-        <div className="grid md:grid-cols-3 gap-3">
-          {team.map((m, i) => (
-            <ScrollReveal key={m.name} delay={i * 0.12}>
+        <StaggerReveal className="grid md:grid-cols-3 gap-3" stagger={0.15}>
+          {team.map((m) => (
+            <MotionCard key={m.name}>
               <Card className="p-9 text-center">
-                <div className="relative mx-auto mb-5">
-                  <div className={`w-16 h-16 rounded-[14px] ${m.color} flex items-center justify-center mx-auto`}>
+                <div className="relative mx-auto mb-5 w-16 h-16">
+                  <div className={`w-16 h-16 rounded-[14px] ${m.color} flex items-center justify-center`}>
                     <span className="font-display font-bold text-[1.5rem] text-background">{m.name[0]}</span>
                   </div>
-                  <div className="absolute -bottom-0.5 -right-0.5 left-1/2 ml-[18px] w-3.5 h-3.5 bg-background rounded-[5px] flex items-center justify-center">
-                    <div className="w-[7px] h-[7px] rounded-full bg-emerald-500 animate-pulse" />
+                  <div className="absolute -bottom-0.5 -right-0.5 w-3.5 h-3.5 bg-background rounded-[5px] flex items-center justify-center">
+                    <PulsingDot />
                   </div>
                 </div>
                 <h3 className="font-display font-bold text-[clamp(1.125rem,2vw,1.375rem)] text-foreground tracking-[-0.015em] mb-1">
@@ -45,9 +48,9 @@ export default function Team() {
                 <div className="text-[0.6875rem] text-warm-500 italic mb-3.5">&ldquo;{m.alias}&rdquo;</div>
                 <p className="text-[0.8125rem] text-warm-500 leading-relaxed">{m.desc}</p>
               </Card>
-            </ScrollReveal>
+            </MotionCard>
           ))}
-        </div>
+        </StaggerReveal>
       </div>
     </section>
   );

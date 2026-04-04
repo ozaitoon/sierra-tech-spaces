@@ -1,4 +1,7 @@
-import ScrollReveal from "./ScrollReveal";
+"use client";
+
+import ScrollReveal, { StaggerReveal } from "./ScrollReveal";
+import { MotionCard } from "./Motion";
 import { Card } from "@/components/ui/card";
 import { ShoppingBag, Building2, Heart, UtensilsCrossed, Briefcase } from "lucide-react";
 
@@ -29,9 +32,9 @@ export default function Industries() {
           </div>
         </ScrollReveal>
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
-          {industries.map((ind, i) => (
-            <ScrollReveal key={ind.name} delay={i * 0.08}>
+        <StaggerReveal className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3" stagger={0.1}>
+          {industries.map((ind) => (
+            <MotionCard key={ind.name}>
               <Card className="p-7 flex items-start gap-4 group">
                 <div className="w-10 h-10 rounded-[10px] bg-accent-subtle border border-gold/[0.12] flex items-center justify-center text-gold shrink-0 group-hover:bg-gold/[0.16] transition-colors">
                   <ind.Icon className="w-[18px] h-[18px]" strokeWidth={1.5} />
@@ -41,9 +44,9 @@ export default function Industries() {
                   <p className="text-[0.8125rem] text-warm-500 leading-relaxed">{ind.desc}</p>
                 </div>
               </Card>
-            </ScrollReveal>
+            </MotionCard>
           ))}
-        </div>
+        </StaggerReveal>
       </div>
     </section>
   );

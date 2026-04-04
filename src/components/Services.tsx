@@ -1,18 +1,17 @@
+"use client";
+
 import ScrollReveal from "./ScrollReveal";
-import { Card, CardContent } from "@/components/ui/card";
+import { MotionButton } from "./Motion";
+import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 
 const tiers = [
   {
-    badge: "Start here",
-    badgeVariant: "copper" as const,
-    name: "Quick Wins",
+    badge: "Start here", badgeVariant: "copper" as const, name: "Quick Wins",
     desc: "Low barrier to entry. See value in days, not months.",
-    price: "EGP 5–30K",
-    priceNote: "one-time",
-    featured: false,
+    price: "EGP 5–30K", priceNote: "one-time", featured: false,
     items: [
       { title: "WhatsApp AI Assistant", desc: "Arabic chatbot for FAQs, lead qualification & booking", time: "7–10 days" },
       { title: "Business Website", desc: "Mobile-first, SEO-ready, Arabic/English with contact forms", time: "5–7 days" },
@@ -21,13 +20,9 @@ const tiers = [
     ],
   },
   {
-    badge: "Most popular",
-    badgeVariant: "default" as const,
-    name: "Core Solutions",
+    badge: "Most popular", badgeVariant: "default" as const, name: "Core Solutions",
     desc: "Deeper engagement. Recurring value. Real transformation.",
-    price: "EGP 20–75K",
-    priceNote: "setup + retainer",
-    featured: true,
+    price: "EGP 20–75K", priceNote: "setup + retainer", featured: true,
     items: [
       { title: "Lead Generation System", desc: "Facebook/Instagram ads to WhatsApp qualifier to CRM pipeline", time: "2–3 weeks" },
       { title: "Operations Automation", desc: "Data entry, invoicing, inventory alerts & live dashboards", time: "2–4 weeks" },
@@ -36,13 +31,9 @@ const tiers = [
     ],
   },
   {
-    badge: "Full partnership",
-    badgeVariant: "gold" as const,
-    name: "Premium",
+    badge: "Full partnership", badgeVariant: "gold" as const, name: "Premium",
     desc: "Your ongoing AI partner. High-touch. High-value.",
-    price: "EGP 75K+",
-    priceNote: "custom scoping",
-    featured: false,
+    price: "EGP 75K+", priceNote: "custom scoping", featured: false,
     items: [
       { title: "AI Strategy + Implementation", desc: "Full workflow audit, custom AI roadmap, 3–5 automations, monthly optimization", time: "Ongoing" },
       { title: "Custom Software / SaaS", desc: "Purpose-built internal tools, dashboards, or client-facing applications", time: "Custom" },
@@ -71,9 +62,9 @@ export default function Services() {
 
         <div className="flex flex-col gap-4 lg:gap-0">
           {tiers.map((tier, i) => (
-            <ScrollReveal key={tier.name} delay={i * 0.1}>
+            <ScrollReveal key={tier.name} delay={i * 0.12} direction={i === 0 ? "left" : i === 2 ? "right" : "up"}>
               <Card
-                className={`p-9 lg:p-11 ${tier.featured ? "lg:sticky lg:top-[140px] lg:z-[4] lg:-mt-10 border-gold/20 shadow-[0_0_40px_rgba(212,160,6,0.06)]" : i > 0 ? "lg:sticky lg:top-[100px] lg:z-[3] lg:-mt-10" : "lg:sticky lg:top-[100px] lg:z-[3]"} hover:translate-y-0`}
+                className={`p-9 lg:p-11 ${tier.featured ? "lg:sticky lg:top-[140px] lg:z-[4] lg:-mt-10 border-gold/20 shadow-[0_0_40px_rgba(212,160,6,0.08)]" : i > 0 ? "lg:sticky lg:top-[100px] lg:z-[3] lg:-mt-10" : "lg:sticky lg:top-[100px] lg:z-[3]"} hover:translate-y-0`}
               >
                 <Badge variant={tier.badgeVariant} className="mb-5">{tier.badge}</Badge>
 
@@ -101,11 +92,13 @@ export default function Services() {
                 </div>
 
                 <div className="mt-7">
-                  <a href="https://wa.me/201234567890" target="_blank" rel="noopener noreferrer">
-                    <Button variant={tier.featured ? "default" : "secondary"}>
-                      Get Started
-                    </Button>
-                  </a>
+                  <MotionButton>
+                    <a href="https://wa.me/201234567890" target="_blank" rel="noopener noreferrer">
+                      <Button variant={tier.featured ? "default" : "secondary"}>
+                        Get Started
+                      </Button>
+                    </a>
+                  </MotionButton>
                 </div>
               </Card>
             </ScrollReveal>

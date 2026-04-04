@@ -1,4 +1,7 @@
-import ScrollReveal from "./ScrollReveal";
+"use client";
+
+import ScrollReveal, { StaggerReveal } from "./ScrollReveal";
+import { MotionButton } from "./Motion";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { MessageCircle } from "lucide-react";
@@ -26,34 +29,36 @@ export default function Contact() {
 
         <ScrollReveal delay={0.15}>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-3 mt-9 mb-11">
-            <a href="https://wa.me/201234567890?text=Hi%20Sierra%20Tech%2C%20I%27d%20like%20to%20learn%20more." target="_blank" rel="noopener noreferrer">
-              <Button size="lg">
-                <MessageCircle className="w-5 h-5" />
-                Chat on WhatsApp
-              </Button>
-            </a>
-            <a href="mailto:hello@sierratechspaces.com">
-              <Button variant="secondary" size="lg">
-                hello@sierratechspaces.com
-              </Button>
-            </a>
+            <MotionButton>
+              <a href="https://wa.me/201234567890?text=Hi%20Sierra%20Tech%2C%20I%27d%20like%20to%20learn%20more." target="_blank" rel="noopener noreferrer">
+                <Button size="lg">
+                  <MessageCircle className="w-5 h-5" />
+                  Chat on WhatsApp
+                </Button>
+              </a>
+            </MotionButton>
+            <MotionButton>
+              <a href="mailto:hello@sierratechspaces.com">
+                <Button variant="secondary" size="lg">
+                  hello@sierratechspaces.com
+                </Button>
+              </a>
+            </MotionButton>
           </div>
         </ScrollReveal>
 
-        <ScrollReveal delay={0.25}>
-          <div className="grid sm:grid-cols-3 gap-3 max-w-[560px] mx-auto">
-            {[
-              { value: "15 min", label: "Free discovery call" },
-              { value: "7–14 days", label: "Working prototype" },
-              { value: "EGP 0", label: "Until you see results" },
-            ].map((s) => (
-              <Card key={s.value} className="p-5 hover:translate-y-0">
-                <div className="font-display font-bold text-xl text-gold tracking-[-0.02em] mb-0.5">{s.value}</div>
-                <div className="text-[0.75rem] text-warm-500">{s.label}</div>
-              </Card>
-            ))}
-          </div>
-        </ScrollReveal>
+        <StaggerReveal className="grid sm:grid-cols-3 gap-3 max-w-[560px] mx-auto" stagger={0.12}>
+          {[
+            { value: "15 min", label: "Free discovery call" },
+            { value: "7–14 days", label: "Working prototype" },
+            { value: "EGP 0", label: "Until you see results" },
+          ].map((s) => (
+            <Card key={s.value} className="p-5">
+              <div className="font-display font-bold text-xl text-gold tracking-[-0.02em] mb-0.5">{s.value}</div>
+              <div className="text-[0.75rem] text-warm-500">{s.label}</div>
+            </Card>
+          ))}
+        </StaggerReveal>
       </div>
     </section>
   );

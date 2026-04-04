@@ -1,4 +1,7 @@
-import ScrollReveal from "./ScrollReveal";
+"use client";
+
+import ScrollReveal, { StaggerReveal } from "./ScrollReveal";
+import { MotionCard } from "./Motion";
 import { Card } from "@/components/ui/card";
 import { Languages, Rocket, Zap, Banknote, BarChart3, RefreshCcw } from "lucide-react";
 
@@ -30,9 +33,9 @@ export default function WhySTS() {
           </div>
         </ScrollReveal>
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
-          {items.map((item, i) => (
-            <ScrollReveal key={item.title} delay={i * 0.08}>
+        <StaggerReveal className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3" stagger={0.1}>
+          {items.map((item) => (
+            <MotionCard key={item.title}>
               <Card className="p-8 group">
                 <div className="w-10 h-10 rounded-[10px] bg-accent-subtle border border-gold/[0.12] flex items-center justify-center text-gold mb-5 group-hover:bg-gold/[0.16] transition-colors">
                   <item.Icon className="w-[18px] h-[18px]" strokeWidth={1.5} />
@@ -42,9 +45,9 @@ export default function WhySTS() {
                 </h3>
                 <p className="text-[0.8125rem] text-warm-500 leading-relaxed">{item.desc}</p>
               </Card>
-            </ScrollReveal>
+            </MotionCard>
           ))}
-        </div>
+        </StaggerReveal>
       </div>
     </section>
   );

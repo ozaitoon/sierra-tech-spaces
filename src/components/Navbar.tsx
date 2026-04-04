@@ -2,8 +2,10 @@
 
 import { useState, useEffect } from "react";
 import Image from "next/image";
+import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { MessageCircle, ArrowUpRight } from "lucide-react";
+import { MotionButton, MotionNavLink } from "@/components/Motion";
+import { ArrowUpRight } from "lucide-react";
 
 const links = [
   { label: "Services", href: "#services" },
@@ -24,7 +26,12 @@ export default function Navbar() {
 
   return (
     <>
-      <div className={`fixed top-0 inset-x-0 z-50 transition-all duration-300 ${scrolled ? "px-4 pt-2" : "px-6 pt-3"}`}>
+      <motion.div
+        className={`fixed top-0 inset-x-0 z-50 transition-all duration-300 ${scrolled ? "px-4 pt-2" : "px-6 pt-3"}`}
+        initial={{ y: -80, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ duration: 0.6, delay: 0.8, ease: [0.23, 1, 0.32, 1] }}
+      >
         <nav className="max-w-[1120px] mx-auto flex items-center justify-between h-12 bg-white/[0.04] backdrop-blur-2xl border border-white/[0.07] shadow-[inset_0_0_0_1px_rgba(255,255,255,0.03),0_4px_24px_rgba(0,0,0,0.4)] rounded-full pl-5 pr-1.5">
           <a href="#" className="flex items-center gap-2.5">
             <Image src="/logo.jpeg" alt="STS" width={28} height={28} className="rounded-md" />
@@ -35,23 +42,21 @@ export default function Navbar() {
 
           <div className="hidden md:flex items-center gap-1">
             {links.map((l) => (
-              <a
-                key={l.href}
-                href={l.href}
-                className="text-[0.8125rem] font-medium text-muted-foreground px-3 py-1.5 rounded-md hover:text-foreground hover:bg-white/[0.06] transition-all duration-150"
-              >
+              <MotionNavLink key={l.href} href={l.href}>
                 {l.label}
-              </a>
+              </MotionNavLink>
             ))}
           </div>
 
           <div className="flex items-center gap-2">
-            <a href="https://wa.me/201234567890" target="_blank" rel="noopener noreferrer">
-              <Button variant="nav" size="sm" className="gap-1.5">
-                Get Started
-                <ArrowUpRight className="w-3.5 h-3.5" />
-              </Button>
-            </a>
+            <MotionButton>
+              <a href="https://wa.me/201234567890" target="_blank" rel="noopener noreferrer">
+                <Button variant="nav" size="sm" className="gap-1.5">
+                  Get Started
+                  <ArrowUpRight className="w-3.5 h-3.5" />
+                </Button>
+              </a>
+            </MotionButton>
 
             <button
               onClick={() => setOpen(!open)}
@@ -64,27 +69,43 @@ export default function Navbar() {
             </button>
           </div>
         </nav>
-      </div>
+      </motion.div>
 
       {/* Mobile menu */}
-      <div className={`fixed inset-0 z-40 bg-black/95 backdrop-blur-2xl flex flex-col items-center justify-center gap-7 transition-opacity duration-300 ${open ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"}`}>
-        {links.map((l) => (
-          <a
-            key={l.href}
-            href={l.href}
-            onClick={() => setOpen(false)}
-            className="font-display text-xl font-semibold text-muted-foreground hover:text-foreground transition-colors"
+      <AnimatePresence>
+        {open && (
+          <motion.div
+            className="fixed inset-0 z-40 bg-black/95 backdrop-blur-2xl flex flex-col items-center justify-center gap-7"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.3 }}
           >
-            {l.label}
-          </a>
-        ))}
-        <a href="https://wa.me/201234567890" target="_blank" rel="noopener noreferrer" onClick={() => setOpen(false)}>
-          <Button size="lg" className="mt-2">
-            <MessageCircle className="w-4 h-4" />
-            Chat on WhatsApp
-          </Button>
-        </a>
-      </div>
+            {links.map((l, i) => (
+              <motion.a
+                key={l.href}
+                href={l.href}
+                onClick={() => setOpen(false)}
+                className="font-display text-xl font-semibold text-muted-foreground hover:text-foreground transition-colors"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: i * 0.08, duration: 0.4 }}
+              >
+                {l.label}
+              </motion.a>
+            ))}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.35, duration: 0.4 }}
+            >
+              <a href="https://wa.me/201234567890" target="_blank" rel="noopener noreferrer" onClick={() => setOpen(false)}>
+                <Button size="lg">Get Started</Button>
+              </a>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </>
   );
 }
