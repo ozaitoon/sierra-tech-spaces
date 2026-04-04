@@ -10,11 +10,12 @@
   html {
     scroll-behavior: smooth;
     scrollbar-width: thin;
-    scrollbar-color: #6b6560 #0a0908;
+    scrollbar-color: #6b6560 #000000;
   }
 
   body {
-    @apply bg-background text-warm-300 font-body antialiased font-light;
+    @apply text-warm-300 font-body antialiased font-light;
+    background: #000000;
     overflow-x: hidden;
   }
 

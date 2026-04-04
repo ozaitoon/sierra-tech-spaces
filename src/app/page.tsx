@@ -23,13 +23,11 @@ function SceneWrapper({
 }) {
   return (
     <div className="relative">
-      <div className="absolute inset-0 z-0 opacity-75 pointer-events-none">
+      {/* 3D background — full opacity, no filters */}
+      <div className="absolute inset-0 z-0 pointer-events-none">
         {scene}
       </div>
-      {/* Top blend */}
-      <div className="absolute top-0 inset-x-0 h-32 z-[1] bg-gradient-to-b from-background to-transparent pointer-events-none" />
-      {/* Bottom blend */}
-      <div className="absolute bottom-0 inset-x-0 h-32 z-[1] bg-gradient-to-t from-background to-transparent pointer-events-none" />
+      {/* Content */}
       <div className="relative z-[2]">
         {children}
       </div>
@@ -39,7 +37,7 @@ function SceneWrapper({
 
 export default function Home() {
   return (
-    <main>
+    <main className="overflow-hidden">
       <Navbar />
       <Hero />
 

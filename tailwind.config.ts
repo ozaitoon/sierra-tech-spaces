@@ -18,7 +18,7 @@ const config: Config = {
         border: "rgba(255, 255, 255, 0.08)",
         input: "rgba(255, 255, 255, 0.08)",
         ring: "#D4A006",
-        background: "#0a0908",
+        background: "#000000",
         foreground: "#faf8f5",
         primary: {
           DEFAULT: "#D4A006",
