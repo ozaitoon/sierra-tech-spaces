@@ -10,63 +10,27 @@ import Team from "@/components/Team";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
 
-const TerrainScene = dynamic(() => import("@/components/TerrainScene"), { ssr: false });
-const DashedLines = dynamic(() => import("@/components/DashedLines"), { ssr: false });
-const SpotlightsScene = dynamic(() => import("@/components/SpotlightsScene"), { ssr: false });
-
-function SceneWrapper({
-  children,
-  scene,
-}: {
-  children: React.ReactNode;
-  scene: React.ReactNode;
-}) {
-  return (
-    <div className="relative">
-      {/* 3D background — full opacity, no filters */}
-      <div className="absolute inset-0 z-0 pointer-events-none">
-        {scene}
-      </div>
-      {/* Content */}
-      <div className="relative z-[2]">
-        {children}
-      </div>
-    </div>
-  );
-}
+const FullPageScene = dynamic(() => import("@/components/FullPageScene"), { ssr: false });
 
 export default function Home() {
   return (
-    <main className="overflow-hidden">
-      <Navbar />
-      <Hero />
+    <main>
+      {/* One single Three.js canvas behind EVERYTHING — no seams */}
+      <FullPageScene />
 
-      <SceneWrapper scene={<DashedLines />}>
+      {/* All content layers on top */}
+      <div className="relative z-10">
+        <Navbar />
+        <Hero />
         <Problem />
-      </SceneWrapper>
-
-      <SceneWrapper scene={<TerrainScene />}>
         <Services />
-      </SceneWrapper>
-
-      <SceneWrapper scene={<SpotlightsScene />}>
         <HowItWorks />
-      </SceneWrapper>
-
-      <SceneWrapper scene={<DashedLines />}>
         <WhySTS />
-      </SceneWrapper>
-
-      <SceneWrapper scene={<TerrainScene />}>
         <Industries />
-      </SceneWrapper>
-
-      <SceneWrapper scene={<SpotlightsScene />}>
         <Team />
-      </SceneWrapper>
-
-      <Contact />
-      <Footer />
+        <Contact />
+        <Footer />
+      </div>
     </main>
   );
 }
