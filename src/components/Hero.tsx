@@ -1,26 +1,31 @@
 "use client";
 
+import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { MessageCircle } from "lucide-react";
 
 export default function Hero() {
   return (
     <section className="relative min-h-dvh flex items-center justify-center overflow-hidden">
-      {/* Ambient glows */}
+      {/* Background image */}
       <div className="absolute inset-0 z-0">
-        <div className="absolute top-[-15%] left-1/2 -translate-x-1/2 w-[800px] h-[500px] bg-[radial-gradient(ellipse_at_center,rgba(212,160,6,0.07)_0%,transparent_70%)]" />
-        <div className="absolute bottom-[-10%] left-1/3 w-[500px] h-[400px] bg-[radial-gradient(ellipse_at_center,rgba(194,112,62,0.04)_0%,transparent_70%)]" />
-        <div className="absolute top-1/4 right-0 w-[300px] h-[300px] bg-[radial-gradient(ellipse_at_center,rgba(250,204,21,0.03)_0%,transparent_70%)]" />
+        <Image
+          src="/hero-bg.jpg"
+          alt=""
+          fill
+          priority
+          className="object-cover object-center"
+        />
+        {/* Dark overlay — keeps text readable */}
+        <div className="absolute inset-0 bg-gradient-to-b from-background/80 via-background/50 to-background" />
+        {/* Top fade for navbar */}
+        <div className="absolute top-0 inset-x-0 h-32 bg-gradient-to-b from-background to-transparent" />
       </div>
 
-      {/* Subtle grid */}
-      <div
-        className="absolute inset-0 opacity-[0.025]"
-        style={{
-          backgroundImage: "linear-gradient(rgba(212,160,6,0.4) 1px, transparent 1px), linear-gradient(90deg, rgba(212,160,6,0.4) 1px, transparent 1px)",
-          backgroundSize: "100px 100px",
-        }}
-      />
+      {/* Ambient glows on top of the image */}
+      <div className="absolute inset-0 z-[1] pointer-events-none">
+        <div className="absolute top-[-15%] left-1/2 -translate-x-1/2 w-[800px] h-[500px] bg-[radial-gradient(ellipse_at_center,rgba(212,160,6,0.05)_0%,transparent_70%)]" />
+      </div>
 
       <div className="relative z-10 text-center max-w-[720px] px-6 flex flex-col items-center gap-6">
         {/* Overline */}
@@ -39,7 +44,7 @@ export default function Hero() {
         </h1>
 
         {/* Sub */}
-        <p className="text-[clamp(0.9375rem,1.5vw,1.0625rem)] leading-relaxed text-muted-foreground max-w-[520px] opacity-0 translate-y-5 animate-fade-up [animation-delay:0.4s]">
+        <p className="text-[clamp(0.9375rem,1.5vw,1.0625rem)] leading-relaxed text-warm-200 max-w-[520px] opacity-0 translate-y-5 animate-fade-up [animation-delay:0.4s]">
           We help Egyptian businesses replace their most tedious processes with
           AI — so you can focus on what actually grows your business.
         </p>
@@ -58,13 +63,13 @@ export default function Hero() {
         </div>
 
         {/* Trust */}
-        <p className="text-[0.8125rem] text-warm-500 mt-3 opacity-0 animate-fade-in [animation-delay:0.8s]">
+        <p className="text-[0.8125rem] text-warm-400 mt-3 opacity-0 animate-fade-in [animation-delay:0.8s]">
           Working prototypes in 7–14 days &middot; Arabic-first &middot; Pay only for results
         </p>
       </div>
 
       {/* Scroll line */}
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 w-px h-10 bg-gradient-to-b from-transparent via-warm-500 to-transparent animate-pulse-glow" />
+      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 w-px h-10 bg-gradient-to-b from-transparent via-gold/40 to-transparent animate-pulse-glow" />
     </section>
   );
 }
