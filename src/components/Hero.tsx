@@ -14,17 +14,20 @@ export default function Hero() {
           alt=""
           fill
           priority
-          className="object-cover object-center"
+          className="object-cover object-center scale-[1.02]"
+          sizes="100vw"
+          quality={100}
         />
-        {/* Dark overlay — keeps text readable */}
-        <div className="absolute inset-0 bg-gradient-to-b from-background/80 via-background/50 to-background" />
-        {/* Top fade for navbar */}
-        <div className="absolute top-0 inset-x-0 h-32 bg-gradient-to-b from-background to-transparent" />
       </div>
 
-      {/* Ambient glows on top of the image */}
-      <div className="absolute inset-0 z-[1] pointer-events-none">
-        <div className="absolute top-[-15%] left-1/2 -translate-x-1/2 w-[800px] h-[500px] bg-[radial-gradient(ellipse_at_center,rgba(212,160,6,0.05)_0%,transparent_70%)]" />
+      {/* Overlay — just enough to keep text readable */}
+      <div className="absolute inset-0 z-[1] bg-background/40" />
+      <div className="absolute top-0 inset-x-0 h-40 z-[1] bg-gradient-to-b from-background to-transparent" />
+      <div className="absolute bottom-0 inset-x-0 h-48 z-[1] bg-gradient-to-t from-background to-transparent" />
+
+      {/* Subtle gold glow */}
+      <div className="absolute inset-0 z-[2] pointer-events-none">
+        <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[600px] h-[400px] bg-[radial-gradient(ellipse_at_center,rgba(212,160,6,0.04)_0%,transparent_70%)]" />
       </div>
 
       <div className="relative z-10 text-center max-w-[720px] px-6 flex flex-col items-center gap-6">
@@ -39,14 +42,14 @@ export default function Hero() {
 
         {/* Headline */}
         <h1 className="font-display font-bold text-[clamp(2.5rem,6vw,4.5rem)] leading-[1.05] tracking-[-0.03em] text-foreground [text-wrap:balance] opacity-0 translate-y-5 animate-fade-up [animation-delay:0.25s]">
-          AI that works{" "}
-          <span className="gradient-text">as hard as you do.</span>
+          We automate what{" "}
+          <span className="gradient-text">slows you down.</span>
         </h1>
 
         {/* Sub */}
         <p className="text-[clamp(0.9375rem,1.5vw,1.0625rem)] leading-relaxed text-warm-200 max-w-[520px] opacity-0 translate-y-5 animate-fade-up [animation-delay:0.4s]">
-          We help Egyptian businesses replace their most tedious processes with
-          AI — so you can focus on what actually grows your business.
+          AI-powered automations for Egyptian businesses — from WhatsApp bots
+          to full operations dashboards. Built in days, not months.
         </p>
 
         {/* CTAs */}
@@ -64,12 +67,12 @@ export default function Hero() {
 
         {/* Trust */}
         <p className="text-[0.8125rem] text-warm-400 mt-3 opacity-0 animate-fade-in [animation-delay:0.8s]">
-          Working prototypes in 7–14 days &middot; Arabic-first &middot; Pay only for results
+          Prototypes in 7–14 days &middot; Arabic-first &middot; Demo before payment
         </p>
       </div>
 
       {/* Scroll line */}
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 w-px h-10 bg-gradient-to-b from-transparent via-gold/40 to-transparent animate-pulse-glow" />
+      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 w-px h-10 bg-gradient-to-b from-transparent via-gold/40 to-transparent animate-pulse-glow z-10" />
     </section>
   );
 }
