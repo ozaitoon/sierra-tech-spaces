@@ -1,8 +1,6 @@
 "use client";
 
-import ScrollReveal, { StaggerReveal } from "./ScrollReveal";
-import { MotionCard } from "./Motion";
-import { Card } from "@/components/ui/card";
+import ScrollReveal from "./ScrollReveal";
 import { ShoppingBag, Building2, Heart, UtensilsCrossed, Briefcase } from "lucide-react";
 
 const industries = [
@@ -15,38 +13,53 @@ const industries = [
 
 export default function Industries() {
   return (
-    <section className="py-24 md:py-36">
-      <div className="container">
+    <section className="py-28 md:py-40 overflow-hidden">
+      <div className="container max-w-[1000px]">
         <ScrollReveal>
-          <div className="text-center max-w-[600px] mx-auto mb-14">
-            <div className="flex items-center justify-center gap-2.5 mb-4">
-              <span className="w-6 h-px bg-gold/50" />
-              <span className="text-xs font-semibold tracking-[0.25em] uppercase text-gold">Industries</span>
-            </div>
-            <h2 className="font-display font-bold text-[clamp(1.75rem,3.5vw,2.5rem)] leading-[0.95] tracking-[-0.04em] text-foreground mb-3.5">
-              Built for your industry.
+          <div className="text-center mb-20">
+            <p className="text-xs uppercase tracking-[0.3em] text-white/40 mb-6">Industries</p>
+            <h2 className="text-[clamp(1.75rem,4vw,3rem)] font-[100] text-white tracking-tighter leading-tight mb-4">
+              Built For Your{" "}
+              <span className="bg-gradient-to-r from-purple-400 to-purple-600 bg-clip-text text-transparent">
+                Industry
+              </span>
             </h2>
-            <p className="text-[0.9375rem] text-muted-foreground max-w-[480px] mx-auto">
-              We focus on industries where AI delivers the biggest, fastest impact for Egyptian businesses.
-            </p>
           </div>
         </ScrollReveal>
 
-        <StaggerReveal className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3" stagger={0.1}>
-          {industries.map((ind) => (
-            <MotionCard key={ind.name}>
-              <Card className="p-7 h-full flex items-start gap-4 group">
-                <div className="w-10 h-10 rounded-[10px] bg-accent-subtle border border-gold/[0.12] flex items-center justify-center text-gold shrink-0 group-hover:bg-gold/[0.16] transition-colors">
-                  <ind.Icon className="w-[18px] h-[18px]" strokeWidth={1.5} />
+        <div className="relative">
+          {/* Vertical timeline line */}
+          <div className="absolute left-6 md:left-1/2 top-0 bottom-0 w-px bg-gradient-to-b from-transparent via-purple-500/20 to-transparent" />
+
+          {industries.map((ind, i) => {
+            const isLeft = i % 2 === 0;
+            return (
+              <ScrollReveal key={ind.name} delay={i * 0.1}>
+                <div className={`relative flex items-center mb-16 last:mb-0 ${isLeft ? "md:flex-row" : "md:flex-row-reverse"}`}>
+                  {/* Content */}
+                  <div className={`flex-1 pl-16 md:pl-0 ${isLeft ? "md:pr-16 md:text-right" : "md:pl-16 md:text-left"}`}>
+                    <div className={`group inline-flex flex-col ${isLeft ? "md:items-end" : "md:items-start"}`}>
+                      <h3 className="text-2xl font-[100] text-white tracking-tighter mb-2 group-hover:text-purple-300 transition-colors duration-500">
+                        {ind.name}
+                      </h3>
+                      <p className="text-sm font-light text-white/60 leading-relaxed max-w-[300px]">
+                        {ind.desc}
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* Center dot */}
+                  <div className="absolute left-6 md:left-1/2 -translate-x-1/2 w-12 h-12 rounded-full border border-purple-500/30 bg-black/80 backdrop-blur-sm flex items-center justify-center z-10 hover:border-purple-400/60 hover:bg-purple-500/10 transition-all duration-500">
+                    <ind.Icon className="w-5 h-5 text-purple-400" strokeWidth={1.5} />
+                  </div>
+
+                  {/* Spacer for other side */}
+                  <div className="hidden md:block flex-1" />
                 </div>
-                <div>
-                  <h3 className="font-display font-semibold text-foreground mb-1 tracking-[-0.04em]">{ind.name}</h3>
-                  <p className="text-[0.8125rem] text-warm-500 leading-[1.8]">{ind.desc}</p>
-                </div>
-              </Card>
-            </MotionCard>
-          ))}
-        </StaggerReveal>
+              </ScrollReveal>
+            );
+          })}
+        </div>
       </div>
     </section>
   );

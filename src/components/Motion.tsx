@@ -74,7 +74,7 @@ export function MotionNavLink({
     <motion.a
       href={href}
       onClick={onClick}
-      className="relative text-[0.8125rem] font-medium text-muted-foreground px-3 py-1.5 rounded-md"
+      className="relative text-[0.9375rem] font-medium text-muted-foreground px-2 py-1.5 rounded-md"
       whileHover="hover"
     >
       <motion.span

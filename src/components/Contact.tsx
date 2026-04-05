@@ -1,80 +1,90 @@
 "use client";
 
 import dynamic from "next/dynamic";
-import ScrollReveal, { StaggerReveal } from "./ScrollReveal";
+import ScrollReveal from "./ScrollReveal";
 import { MotionButton } from "./Motion";
-import { Button } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
-import { MessageCircle } from "lucide-react";
+import ShinyText from "./ShinyText";
 
 const Globe = dynamic(() => import("./Globe"), { ssr: false });
 
 export default function Contact() {
   return (
-    <section id="contact" className="py-24 md:py-36 text-center relative overflow-hidden">
+    <section id="contact" className="py-28 md:py-40 text-center relative overflow-hidden">
       {/* Globe behind content */}
-      <div className="absolute inset-0 z-0 flex items-center justify-center opacity-40 pointer-events-none">
+      <div className="absolute inset-0 z-0 flex items-center justify-center opacity-30 pointer-events-none">
         <div className="w-[600px] h-[600px] md:w-[800px] md:h-[800px]">
           <Globe />
         </div>
       </div>
 
-      {/* Fade overlays to blend globe */}
-      <div className="absolute inset-0 z-[1] pointer-events-none">
-        <div className="absolute top-0 inset-x-0 h-[30%] bg-gradient-to-b from-background to-transparent" />
-        <div className="absolute bottom-0 inset-x-0 h-[30%] bg-gradient-to-t from-background to-transparent" />
-      </div>
-
-      <div className="container relative z-10">
+      <div className="container max-w-[900px] relative z-10">
         <ScrollReveal>
           <div className="max-w-[600px] mx-auto">
-            <div className="flex items-center justify-center gap-2.5 mb-4">
-              <span className="w-6 h-px bg-gold/50" />
-              <span className="text-xs font-semibold tracking-[0.25em] uppercase text-gold">Get Started</span>
-            </div>
-            <h2 className="font-display font-bold text-[clamp(1.75rem,3.5vw,2.5rem)] leading-[0.95] tracking-[-0.04em] text-foreground mb-3.5">
-              Ready to stop wasting{" "}
-              <span className="gradient-text">time and money?</span>
+            <p className="text-xs uppercase tracking-[0.3em] text-white/40 mb-6">Get Started</p>
+            <h2 className="text-[clamp(1.75rem,4vw,3rem)] font-[100] text-white tracking-tighter leading-tight mb-4">
+              Ready To Stop Wasting{" "}
+              <span className="bg-gradient-to-r from-purple-400 to-purple-600 bg-clip-text text-transparent">
+                Time And Money
+              </span>
             </h2>
-            <p className="text-[0.9375rem] text-muted-foreground max-w-[480px] mx-auto">
-              Send us a message on WhatsApp. We&apos;ll have a 15-minute chat, identify your
-              biggest time-waster, and show you how we&apos;d fix it.
+            <p className="text-base font-light text-white max-w-[480px] mx-auto leading-relaxed">
+              Send us a message on WhatsApp. We'll have a 15-minute chat, identify your
+              biggest time-waster, and show you how we'd fix it.
             </p>
           </div>
         </ScrollReveal>
 
         <ScrollReveal delay={0.15}>
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-3 mt-9 mb-11">
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-6 mt-10 mb-14">
             <MotionButton>
-              <a href="https://wa.me/201234567890?text=Hi%20Sierra%20Tech%2C%20I%27d%20like%20to%20learn%20more." target="_blank" rel="noopener noreferrer">
-                <Button size="lg">
-                  <MessageCircle className="w-5 h-5" />
-                  Chat on WhatsApp
-                </Button>
+              <a
+                href="https://wa.me/201234567890?text=Hi%20Sierra%20Tech%2C%20I%27d%20like%20to%20learn%20more."
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group relative inline-flex items-center justify-center px-10 py-4"
+              >
+                <span className="absolute top-0 left-0 w-4 h-4 border-t-2 border-l-2 border-white group-hover:w-5 group-hover:h-5 transition-all duration-300" />
+                <span className="absolute top-0 right-0 w-4 h-4 border-t-2 border-r-2 border-white group-hover:w-5 group-hover:h-5 transition-all duration-300" />
+                <span className="absolute bottom-0 left-0 w-4 h-4 border-b-2 border-l-2 border-white group-hover:w-5 group-hover:h-5 transition-all duration-300" />
+                <span className="absolute bottom-0 right-0 w-4 h-4 border-b-2 border-r-2 border-white group-hover:w-5 group-hover:h-5 transition-all duration-300" />
+                <ShinyText
+                  text="Chat On WhatsApp"
+                  speed={5}
+                  color="#ffffff"
+                  shineColor="#7c3aed"
+                  spread={120}
+                  className="text-lg font-light tracking-wide"
+                />
               </a>
             </MotionButton>
-            <MotionButton>
-              <a href="mailto:hello@sierratechspaces.com">
-                <Button variant="secondary" size="lg">
-                  hello@sierratechspaces.com
-                </Button>
-              </a>
-            </MotionButton>
+            <a
+              href="mailto:hello@sierratechspaces.com"
+              className="text-sm font-light text-white/50 hover:text-white transition-colors"
+            >
+              hello@sierratechspaces.com
+            </a>
           </div>
         </ScrollReveal>
 
-        <StaggerReveal className="grid sm:grid-cols-3 gap-3 max-w-[560px] mx-auto" stagger={0.12}>
-          {[
-            { value: "15 min", label: "Free discovery call" },
-            { value: "7–14 days", label: "Working prototype" },
-            { value: "Free", label: "Until you see results" },
-          ].map((s) => (
-            <Card key={s.value} className="p-5">
-              <div className="font-display font-bold text-xl text-gold tracking-[-0.04em] mb-0.5">{s.value}</div>
-              <div className="text-[0.75rem] text-warm-500">{s.label}</div>
-            </Card>
-          ))}
-        </StaggerReveal>
+        <ScrollReveal>
+          <div className="flex items-center justify-center gap-8 md:gap-16 max-w-[700px] mx-auto">
+            {[
+              { value: "15 min", label: "Free discovery call" },
+              { value: "7–14 days", label: "Working prototype" },
+              { value: "Free", label: "Until you see results" },
+            ].map((s, i, arr) => (
+              <div key={s.value} className="flex items-center gap-8 md:gap-16">
+                <div className="text-center">
+                  <div className="text-3xl font-[100] text-white tracking-tighter mb-1">{s.value}</div>
+                  <div className="text-xs font-light text-purple-400 uppercase tracking-[0.15em]">{s.label}</div>
+                </div>
+                {i < arr.length - 1 && (
+                  <div className="h-10 w-px bg-white/[0.08]" />
+                )}
+              </div>
+            ))}
+          </div>
+        </ScrollReveal>
       </div>
     </section>
   );

@@ -17,9 +17,9 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Sierra Tech Spaces — We Automate What Slows You Down",
+  title: "Sierra Tech Spaces |We Automate What Slows You Down",
   description:
-    "Egypt's AI automation agency. We help businesses save hours, capture leads, and grow revenue with custom AI solutions — delivered in days, not months.",
+    "Egypt's AI automation agency. We help businesses save hours, capture leads, and grow revenue with custom AI solutions |delivered in days, not months.",
   keywords: [
     "AI agency Egypt",
     "automation Cairo",

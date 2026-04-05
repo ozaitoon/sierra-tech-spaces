@@ -1,53 +1,52 @@
 "use client";
 
-import ScrollReveal, { StaggerReveal } from "./ScrollReveal";
-import { MotionCard } from "./Motion";
-import { Card } from "@/components/ui/card";
+import ScrollReveal from "./ScrollReveal";
 import { Languages, Rocket, Zap, Banknote, BarChart3, RefreshCcw } from "lucide-react";
 
 const items = [
-  { title: "Arabic-First", desc: "Everything we build speaks Egyptian Arabic from day one. Your chatbot, dashboards, reports — in the language your team uses.", Icon: Languages },
+  { title: "Arabic-First", desc: "Everything we build speaks Egyptian Arabic from day one. Your chatbot, dashboards, reports | in the language your team uses.", Icon: Languages },
   { title: "Demo Before Payment", desc: "Working prototype with your real data before you spend a single pound. If it doesn't impress you, walk away.", Icon: Rocket },
-  { title: "7–14 Day Delivery", desc: "Not months. Not quarters. Working automation deployed within two weeks. We move fast because your business can't wait.", Icon: Zap },
-  { title: "Local Pricing", desc: "Based in Cairo, so you get world-class AI at local rates. No inflated agency fees — just fair, transparent pricing.", Icon: Banknote },
-  { title: "Measurable ROI", desc: "Every project has a clear metric: hours saved, leads captured, revenue recovered. No numbers, no charge.", Icon: BarChart3 },
-  { title: "Ongoing Partnership", desc: "We don't build and disappear. Monthly retainers keep your automations optimized and scaling with your business.", Icon: RefreshCcw },
+  { title: "7–14 Day Delivery", desc: "Not months. Not quarters. Working automation deployed within two weeks.", Icon: Zap },
+  { title: "Local Pricing", desc: "World-class AI at local rates. No inflated agency fees | just fair, transparent pricing.", Icon: Banknote },
+  { title: "Measurable ROI", desc: "Every project has a clear metric: hours saved, leads captured, revenue recovered.", Icon: BarChart3 },
+  { title: "Ongoing Partnership", desc: "Monthly retainers keep your automations optimized and scaling with your business.", Icon: RefreshCcw },
 ];
 
 export default function WhySTS() {
   return (
-    <section id="why" className="py-24 md:py-36">
-      <div className="container">
+    <section id="why" className="py-28 md:py-40">
+      <div className="container max-w-[800px]">
         <ScrollReveal>
-          <div className="text-center max-w-[600px] mx-auto mb-14">
-            <div className="flex items-center justify-center gap-2.5 mb-4">
-              <span className="w-6 h-px bg-gold/50" />
-              <span className="text-xs font-semibold tracking-[0.25em] uppercase text-gold">Why Us</span>
-            </div>
-            <h2 className="font-display font-bold text-[clamp(1.75rem,3.5vw,2.5rem)] leading-[0.95] tracking-[-0.04em] text-foreground mb-3.5">
-              Why Sierra Tech?
+          <div className="text-center mb-20">
+            <p className="text-xs uppercase tracking-[0.3em] text-white/40 mb-6">Why Us</p>
+            <h2 className="text-[clamp(1.75rem,4vw,3rem)] font-[100] text-white tracking-tighter leading-tight mb-4">
+              Why{" "}
+              <span className="bg-gradient-to-r from-purple-400 to-purple-600 bg-clip-text text-transparent">
+                Us
+              </span>
             </h2>
-            <p className="text-[0.9375rem] text-muted-foreground max-w-[480px] mx-auto">
-              We&apos;re not another agency selling buzzwords. We&apos;re engineers who build things that work.
-            </p>
           </div>
         </ScrollReveal>
 
-        <StaggerReveal className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3" stagger={0.1}>
-          {items.map((item) => (
-            <MotionCard key={item.title}>
-              <Card className="p-8 h-full group">
-                <div className="w-10 h-10 rounded-[10px] bg-accent-subtle border border-gold/[0.12] flex items-center justify-center text-gold mb-5 group-hover:bg-gold/[0.16] transition-colors">
-                  <item.Icon className="w-[18px] h-[18px]" strokeWidth={1.5} />
+        <div className="space-y-0">
+          {items.map((item, i) => (
+            <ScrollReveal key={item.title} delay={i * 0.08}>
+              <div className="group flex items-start gap-6 md:gap-10 py-8 border-b border-white/[0.04] last:border-b-0 hover:border-white/[0.08] transition-colors">
+                <div className="w-12 h-12 rounded-full border border-purple-500/20 flex items-center justify-center text-purple-400 shrink-0 group-hover:border-purple-500/50 group-hover:bg-purple-500/5 transition-all duration-500">
+                  <item.Icon className="w-5 h-5" strokeWidth={1.5} />
                 </div>
-                <h3 className="font-display font-semibold text-foreground mb-2 tracking-[-0.04em]">
-                  {item.title}
-                </h3>
-                <p className="text-[0.8125rem] text-warm-500 leading-[1.8]">{item.desc}</p>
-              </Card>
-            </MotionCard>
+                <div className="flex-1 flex flex-col md:flex-row md:items-start md:justify-between md:gap-12">
+                  <h3 className="text-xl font-[100] text-white tracking-tighter mb-2 md:mb-0 md:min-w-[200px] group-hover:text-purple-300 transition-colors duration-500">
+                    {item.title}
+                  </h3>
+                  <p className="text-sm font-light text-white leading-relaxed max-w-[380px] group-hover:text-white transition-colors duration-500">
+                    {item.desc}
+                  </p>
+                </div>
+              </div>
+            </ScrollReveal>
           ))}
-        </StaggerReveal>
+        </div>
       </div>
     </section>
   );

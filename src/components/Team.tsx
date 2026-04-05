@@ -1,54 +1,80 @@
 "use client";
 
 import ScrollReveal, { StaggerReveal } from "./ScrollReveal";
-import { MotionCard, PulsingDot } from "./Motion";
-import { Card } from "@/components/ui/card";
+import ProfileCard from "./ProfileCard";
 
 const team = [
-  { name: "Omar", role: "AI Engineer", alias: "The Oracle", color: "bg-gold", desc: "Full-stack developer and AI specialist. Builds the custom automations, chatbots, and software that power everything we deliver." },
-  { name: "Nabih", role: "E-commerce & Marketing", alias: "The Strategist", color: "bg-copper", desc: "Deep experience in e-commerce and digital marketing. Ensures every solution drives real business metrics — leads, sales, and retention." },
-  { name: "Youssef", role: "Operations & Audit", alias: "The Analyst", color: "bg-gold-light", desc: "Operations and audit professional. Maps business workflows, identifies inefficiencies, and ensures every automation is built on solid process foundations." },
+  {
+    name: "Youssef Gebaly",
+    title: "AI Engineer",
+    handle: "theoracle",
+    status: "Building",
+    avatarUrl: "/team-youssef.png",
+    glowColor: "rgba(168, 85, 247, 0.15)",
+    gradient: "linear-gradient(145deg, #2d1b4e8c 0%, #7c3aed44 100%)",
+  },
+  {
+    name: "Nabih",
+    title: "E-commerce & Marketing",
+    handle: "thestrategist",
+    status: "Strategizing",
+    avatarUrl: "/team-nabih.jpg",
+    glowColor: "rgba(139, 92, 246, 0.15)",
+    gradient: "linear-gradient(145deg, #1e1b4b8c 0%, #8b5cf644 100%)",
+  },
+  {
+    name: "Omar Zaitoon",
+    title: "Operations & Audit",
+    handle: "theanalyst",
+    status: "Optimizing",
+    avatarUrl: "/team-omar.jpg",
+    glowColor: "rgba(124, 58, 237, 0.15)",
+    gradient: "linear-gradient(145deg, #3b1c5e8c 0%, #a855f744 100%)",
+  },
 ];
 
 export default function Team() {
   return (
-    <section id="team" className="py-24 md:py-36">
-      <div className="container">
+    <section id="team" className="py-28 md:py-40">
+      <div className="container max-w-[1400px]">
         <ScrollReveal>
-          <div className="text-center max-w-[600px] mx-auto mb-14">
-            <div className="flex items-center justify-center gap-2.5 mb-4">
-              <span className="w-6 h-px bg-gold/50" />
-              <span className="text-xs font-semibold tracking-[0.25em] uppercase text-gold">Team</span>
-            </div>
-            <h2 className="font-display font-bold text-[clamp(1.75rem,3.5vw,2.5rem)] leading-[0.95] tracking-[-0.04em] text-foreground mb-3.5">
-              The people behind STS.
+          <div className="text-center mb-20">
+            <p className="text-xs uppercase tracking-[0.3em] text-white/40 mb-6">Team</p>
+            <h2 className="text-[clamp(1.75rem,4vw,3rem)] font-[100] text-white tracking-tighter leading-tight mb-4">
+              The People Behind{" "}
+              <span className="bg-gradient-to-r from-purple-400 to-purple-600 bg-clip-text text-transparent">
+                STS
+              </span>
             </h2>
-            <p className="text-[0.9375rem] text-muted-foreground max-w-[480px] mx-auto">
+            <p className="text-base font-light text-white max-w-[480px] mx-auto leading-relaxed">
               Three founders. Three complementary skill sets. One mission.
             </p>
           </div>
         </ScrollReveal>
 
-        <StaggerReveal className="grid md:grid-cols-3 gap-3" stagger={0.15}>
+        <StaggerReveal className="grid md:grid-cols-3 gap-16 justify-items-center" stagger={0.15}>
           {team.map((m) => (
-            <MotionCard key={m.name}>
-              <Card className="p-9 h-full text-center">
-                <div className="relative mx-auto mb-5 w-16 h-16">
-                  <div className={`w-16 h-16 rounded-[14px] ${m.color} flex items-center justify-center`}>
-                    <span className="font-display font-bold text-[1.5rem] text-background">{m.name[0]}</span>
-                  </div>
-                  <div className="absolute -bottom-0.5 -right-0.5 w-3.5 h-3.5 bg-background rounded-[5px] flex items-center justify-center">
-                    <PulsingDot />
-                  </div>
-                </div>
-                <h3 className="font-display font-bold text-[clamp(1.125rem,2vw,1.375rem)] text-foreground tracking-[-0.04em] mb-1">
-                  {m.name}
-                </h3>
-                <div className="text-[0.8125rem] text-gold font-medium mb-0.5">{m.role}</div>
-                <div className="text-[0.6875rem] text-warm-500 italic mb-3.5">&ldquo;{m.alias}&rdquo;</div>
-                <p className="text-[0.8125rem] text-warm-500 leading-[1.8]">{m.desc}</p>
-              </Card>
-            </MotionCard>
+            <div key={m.name} className="flex flex-col items-center">
+              <div className="text-center mb-5">
+                <h3 className="text-2xl font-[100] text-white tracking-tighter mb-1">{m.name}</h3>
+                <p className="text-xs uppercase tracking-[0.2em] text-purple-400 font-light">{m.title}</p>
+              </div>
+              <ProfileCard
+                name=""
+                title=""
+                handle={m.handle}
+                status={m.status}
+                avatarUrl={m.avatarUrl}
+                iconUrl="/logo-sts.png"
+                showUserInfo
+                enableTilt
+                contactText="Connect"
+                behindGlowEnabled
+                behindGlowColor={m.glowColor}
+                innerGradient={m.gradient}
+                onContactClick={() => window.open("https://wa.me/201234567890", "_blank")}
+              />
+            </div>
           ))}
         </StaggerReveal>
       </div>
