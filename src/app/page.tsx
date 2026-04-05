@@ -1,3 +1,4 @@
+// Auto-deploy test
 import dynamic from "next/dynamic";
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
