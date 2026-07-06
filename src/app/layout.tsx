@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Space_Grotesk, Inter } from "next/font/google";
+import { attaIconMetadata, attaManifestPath } from "@/lib/atta-metadata";
 import "./globals.css";
 
 const spaceGrotesk = Space_Grotesk({
@@ -27,6 +28,8 @@ export const metadata: Metadata = {
     "AI consulting",
     "Sierra Tech Spaces",
   ],
+  icons: attaIconMetadata,
+  manifest: attaManifestPath,
 };
 
 export default function RootLayout({

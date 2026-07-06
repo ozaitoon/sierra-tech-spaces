@@ -72,7 +72,7 @@ export default function Team() {
                 behindGlowEnabled
                 behindGlowColor={m.glowColor}
                 innerGradient={m.gradient}
-                onContactClick={() => window.open("https://wa.me/201234567890", "_blank")}
+                onContactClick={() => window.open("https://wa.me/201214444253", "_blank")}
               />
             </div>
           ))}

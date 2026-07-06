@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 150" role="img" aria-labelledby="title desc">
+  <title id="title">Mohamed Atta For Construction and General Supplies</title>
+  <desc id="desc">Mohamed Atta logo with white Atta mark and written company name.</desc>
+  <g fill="#ffffff" transform="translate(-10 18) scale(.15)">
+    <path d="M459 79 204 451h75L509 115l-24-36z" />
+    <path d="M549 156 347 451h66L594 186l-22-30z" />
+    <path d="M620 225 465 451h62L662 254l-20-29z" />
+    <path d="M684 304 546 511H190l55-68h272l129-193z" />
+    <path d="M708 300 533 559h107l78-114 110 114h113L742 300z" />
+    <rect x="671" y="449" width="29" height="29" />
+    <rect x="716" y="449" width="29" height="29" />
+    <rect x="671" y="493" width="29" height="29" />
+    <rect x="716" y="493" width="29" height="29" />
+  </g>
+  <text x="185" y="38" fill="#ffffff" font-family="Georgia, 'Times New Roman', serif" font-size="28" font-weight="700" letter-spacing=".2">
+    Mohamed Atta
+  </text>
+  <text x="185" y="68" fill="#ffffff" font-family="Georgia, 'Times New Roman', serif" font-size="18" font-weight="700">
+    For Construction &amp; General Supplies
+  </text>
+  <text x="185" y="98" fill="#ffffff" font-family="'Segoe UI', Tahoma, Arial, sans-serif" font-size="16" font-weight="800">
+    محمد عطا وشريكه للمقاولات والتوريدات العمومية
+  </text>
+</svg>

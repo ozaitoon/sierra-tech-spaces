@@ -67,3 +67,12 @@ body::after {
 .reveal.visible {
   @apply opacity-100 translate-y-0;
 }
+
+@keyframes atta-logo-marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}

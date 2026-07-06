@@ -13,7 +13,7 @@ const leftLinks = [
 const rightLinks = [
   { label: "Portfolio", href: "#process" },
   { label: "About", href: "#why" },
-  { label: "Contact", href: "#team" },
+  { label: "Contact", href: "#contact" },
 ];
 
 const allLinks = [...leftLinks, ...rightLinks];
@@ -57,7 +57,7 @@ export default function Navbar() {
 
   // Track which section is in view
   useEffect(() => {
-    const sectionIds = ["services", "process", "why", "team"];
+    const sectionIds = ["services", "process", "why", "contact"];
     const observer = new IntersectionObserver(
       (entries) => {
         for (const entry of entries) {
@@ -167,6 +167,7 @@ export default function Navbar() {
                 {l.label}
               </motion.a>
             ))}
+
           </motion.div>
         )}
       </AnimatePresence>

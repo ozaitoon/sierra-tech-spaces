@@ -6,7 +6,6 @@ import Services from "@/components/Services";
 import HowItWorks from "@/components/HowItWorks";
 import WhySTS from "@/components/WhySTS";
 import Industries from "@/components/Industries";
-import Team from "@/components/Team";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
 
@@ -59,7 +58,6 @@ export default function Home() {
         </div>
         <Services />
         <Problem />
-        <Team />
         <HowItWorks />
         <WhySTS />
         <Industries />

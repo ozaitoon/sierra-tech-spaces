@@ -28,7 +28,7 @@ export default function Contact() {
               </span>
             </h2>
             <p className="text-base font-light text-white max-w-[480px] mx-auto leading-relaxed">
-              Send us a message on WhatsApp. We'll have a 15-minute chat, identify your
+              Send us a message on WhatsApp. We'll have a quick chat, identify your
               biggest time-waster, and show you how we'd fix it.
             </p>
           </div>
@@ -38,7 +38,7 @@ export default function Contact() {
           <div className="flex flex-col sm:flex-row items-center justify-center gap-6 mt-10 mb-14">
             <MotionButton>
               <a
-                href="https://wa.me/201234567890?text=Hi%20Sierra%20Tech%2C%20I%27d%20like%20to%20learn%20more."
+                href="https://wa.me/201555454377?text=Hi%20Sierra%20Tech%2C%20I%27d%20like%20to%20learn%20more."
                 target="_blank"
                 rel="noopener noreferrer"
                 className="group relative inline-flex items-center justify-center px-10 py-4"
@@ -63,26 +63,6 @@ export default function Contact() {
             >
               hello@sierratechspaces.com
             </a>
-          </div>
-        </ScrollReveal>
-
-        <ScrollReveal>
-          <div className="flex items-center justify-center gap-8 md:gap-16 max-w-[700px] mx-auto">
-            {[
-              { value: "15 min", label: "Free discovery call" },
-              { value: "7–14 days", label: "Working prototype" },
-              { value: "Free", label: "Until you see results" },
-            ].map((s, i, arr) => (
-              <div key={s.value} className="flex items-center gap-8 md:gap-16">
-                <div className="text-center">
-                  <div className="text-3xl font-[100] text-white tracking-tighter mb-1">{s.value}</div>
-                  <div className="text-xs font-light text-purple-400 uppercase tracking-[0.15em]">{s.label}</div>
-                </div>
-                {i < arr.length - 1 && (
-                  <div className="h-10 w-px bg-white/[0.08]" />
-                )}
-              </div>
-            ))}
           </div>
         </ScrollReveal>
       </div>

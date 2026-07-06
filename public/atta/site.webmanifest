@@ -1,0 +1,26 @@
+{
+  "name": "Atta Group",
+  "short_name": "Atta",
+  "description": "DATSAN transformers, electrical supply, industrial generators, and energy infrastructure contracting.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#020303",
+  "theme_color": "#061326",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    },
+    {
+      "src": "/icon.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    },
+    {
+      "src": "/apple-icon.png",
+      "sizes": "180x180",
+      "type": "image/png"
+    }
+  ]
+}

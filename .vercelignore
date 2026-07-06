@@ -1,0 +1,10 @@
+node_modules/
+.next/
+.git/
+.env*.local
+.vercel/
+tmp/
+output/
+dev-server*.log
+*.pyc
+__pycache__/

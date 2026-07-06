@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 640" role="img" aria-labelledby="title desc">
+  <title id="title">Atta white mark</title>
+  <desc id="desc">White Atta mark with angled industrial bars, base beam, roof shape, and window detail.</desc>
+  <g fill="#ffffff">
+    <path d="M459 79 204 451h75L509 115l-24-36z" />
+    <path d="M549 156 347 451h66L594 186l-22-30z" />
+    <path d="M620 225 465 451h62L662 254l-20-29z" />
+    <path d="M684 304 546 511H190l55-68h272l129-193z" />
+    <path d="M708 300 533 559h107l78-114 110 114h113L742 300z" />
+    <rect x="671" y="449" width="29" height="29" />
+    <rect x="716" y="449" width="29" height="29" />
+    <rect x="671" y="493" width="29" height="29" />
+    <rect x="716" y="493" width="29" height="29" />
+  </g>
+</svg>
