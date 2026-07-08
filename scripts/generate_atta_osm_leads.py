@@ -3,11 +3,11 @@ Generate additional Atta Group leads from public OpenStreetMap / Overpass data.
 
 This is a reproducible lead generator, not a private-data scraper. It pulls named
 Egypt records that look like factories, industrial companies, contractors, or
-construction/material suppliers, scores them for Atta products, and writes a
-TypeScript lead pack consumed by the dashboard.
+construction/material suppliers, scores them for Atta products, and writes the
+JSON lead pack consumed by the dashboard.
 
 Usage:
-  python -B scripts/generate_atta_osm_leads.py --limit 300
+  python -B scripts/generate_atta_osm_leads.py --limit 100
 """
 
 from __future__ import annotations
@@ -28,12 +28,13 @@ OVERPASS_URLS = [
 ]
 
 CACHE_PATH = Path("tmp") / "lead_enrichment" / "egypt_industrial_osm_overpass.json"
-OUTPUT_PATH = Path("src") / "lib" / "atta-generated-leads.ts"
+OUTPUT_PATH = Path("public") / "atta-generated-leads.json"
 REPORT_PATH = Path("tmp") / "lead_enrichment" / "atta-generated-osm-leads.json"
+VERIFIED_SOURCES_PATH = Path("scripts") / "atta_verified_industrial_sources.json"
 SECONDARY_OSM_CACHES = [Path("tmp") / "lead_cache" / "cairo_osm_overpass.json"]
 
 EGYPT_INDUSTRIAL_BBOXES = [
-    ("cairo-giza-october-obour-badr", 29.70, 30.55, 31.85, 30.35),
+    ("cairo-giza-october-obour-badr", 29.70, 30.55, 30.35, 31.85),
     ("alexandria-borg-el-arab", 30.60, 29.35, 31.35, 30.25),
     ("suez-ismailia-ain-sokhna", 29.35, 31.85, 30.95, 33.10),
     ("sharqia-10th-ramadan", 30.05, 31.45, 30.75, 32.10),
@@ -43,47 +44,131 @@ EGYPT_INDUSTRIAL_BBOXES = [
     ("upper-egypt-industrial", 24.00, 32.00, 27.80, 33.20),
 ]
 
-INDUSTRIAL_TERMS = {
+# A company must have a real industrial buying signal. Broad words such as
+# "company", "trade", and "building" are intentionally not signals.
+STRONG_INDUSTRIAL_TERMS = {
     "factory",
     "plant",
     "works",
-    "industrial",
     "manufacturing",
-    "production",
+    "manufacturer",
+    "switchgear",
+    "transformer",
+    "electrical panel",
+    "power station",
+    "power plant",
+    "refinery",
+    "petrochemical",
+    "oil and gas",
+    "oil & gas",
     "steel",
-    "metal",
+    "copper",
+    "aluminium",
+    "aluminum",
     "cement",
     "concrete",
     "ceramic",
     "glass",
     "chemical",
-    "paint",
+    "fertilizer",
     "plastic",
-    "packaging",
+    "polymer",
     "textile",
     "spinning",
     "weaving",
-    "food",
-    "dairy",
-    "pharma",
-    "pharmaceutical",
-    "fertilizer",
-    "construction",
-    "contracting",
-    "contractor",
-    "engineering",
-    "electrical",
-    "power",
-    "panel",
     "compressor",
-    "oxygen",
-    "nitrogen",
-    "gas",
-    "quarry",
+    "industrial gases",
+    "engineering construction",
+    "electromechanical",
+    "epc",
     "mining",
-    "asphalt",
-    "brick",
-    "tiles",
+    "quarry",
+}
+
+FOOD_AND_HOSPITALITY_TERMS = {
+    "restaurant",
+    "resturant",
+    "cafe",
+    "café",
+    "coffee",
+    "food",
+    "foods",
+    "dairy",
+    "yeast",
+    "flavor",
+    "flavour",
+    "fragrance",
+    "beverage",
+    "juice",
+    "catering",
+    "kitchen",
+    "bakery",
+    "baker",
+    "pizza",
+    "burger",
+    "chicken",
+    "fried",
+    "grill",
+    "sweets",
+    "confectionery",
+    "nuts",
+    "koshari",
+    "shawarma",
+    "waffle",
+    "pancake",
+    "donut",
+    "hotel",
+    "hospitality",
+    "supermarket",
+    "mini market",
+    "مطعم",
+    "كافيه",
+    "قهوة",
+    "اغذية",
+    "غذائية",
+    "أغذية",
+    "اطعمة",
+    "أطعمة",
+    "حلويات",
+    "مخبز",
+    "دواجن",
+    "ألبان",
+}
+
+IRRELEVANT_TERMS = {
+    "school",
+    "university",
+    "faculty",
+    "academy",
+    "museum",
+    "gallery",
+    "mosque",
+    "church",
+    "clinic",
+    "hospital",
+    "pharmacy",
+    "bank",
+    "mall",
+    "gym",
+    "studio",
+    "marketing",
+    "advertising",
+    "consulting",
+    "telecom",
+    "furniture",
+    "decor",
+    "car dealer",
+    "garage",
+    "parking",
+    "football club",
+    "cemetery",
+    "pyramid",
+    "warehouse",
+    "outlet",
+    "print shop",
+    "medical equipment",
+    "dental",
+    "military",
 }
 
 CONSTRUCTION_TERMS = {
@@ -108,9 +193,6 @@ CHEMICAL_GAS_TERMS = {
     "pharma",
     "pharmaceutical",
     "fertilizer",
-    "food",
-    "beverage",
-    "dairy",
     "gas",
     "oxygen",
     "nitrogen",
@@ -162,9 +244,6 @@ area["ISO3166-1"="EG"][admin_level=2]->.egypt;
   nwr["landuse"="industrial"]["name"](area.egypt);
   nwr["industrial"]["name"](area.egypt);
   nwr["office"="construction"]["name"](area.egypt);
-  nwr["office"="company"]["name"](area.egypt);
-  nwr["craft"]["name"](area.egypt);
-  nwr["shop"="trade"]["name"](area.egypt);
   nwr["building"="industrial"]["name"](area.egypt);
 );
 out center tags;
@@ -180,9 +259,6 @@ def overpass_bbox_query(south: float, west: float, north: float, east: float) ->
   nwr["landuse"="industrial"]["name"]({bbox});
   nwr["industrial"]["name"]({bbox});
   nwr["office"="construction"]["name"]({bbox});
-  nwr["office"="company"]["name"]({bbox});
-  nwr["craft"]["name"]({bbox});
-  nwr["shop"="trade"]["name"]({bbox});
   nwr["building"="industrial"]["name"]({bbox});
 );
 out center tags;
@@ -210,7 +286,7 @@ def post_overpass(query: str) -> dict[str, Any]:
     raise RuntimeError(f"Overpass fetch failed: {last_error}")
 
 
-def fetch_overpass(force: bool = False) -> dict[str, Any]:
+def fetch_overpass(force: bool = False, offline: bool = False) -> dict[str, Any]:
     CACHE_PATH.parent.mkdir(parents=True, exist_ok=True)
 
     elements_by_id: dict[str, dict[str, Any]] = {}
@@ -218,6 +294,8 @@ def fetch_overpass(force: bool = False) -> dict[str, Any]:
         batch_path = CACHE_PATH.with_name(f"egypt_industrial_osm_{label}.json")
         if batch_path.exists() and not force:
             data = json.loads(batch_path.read_text(encoding="utf-8"))
+        elif offline:
+            continue
         else:
             print(f"Fetching {label}...")
             try:
@@ -249,6 +327,17 @@ def clean(value: Any) -> str:
 def slugify(value: str) -> str:
     slug = re.sub(r"[^a-z0-9]+", "-", value.lower()).strip("-")
     return slug[:70] or "lead"
+
+
+def contains_term(text: str, term: str) -> bool:
+    """Match a phrase as words, not inside an unrelated word."""
+    if any("\u0600" <= char <= "\u06ff" for char in term):
+        return term in text
+    return bool(re.search(rf"(?<![a-z0-9]){re.escape(term)}(?![a-z0-9])", text))
+
+
+def matching_terms(text: str, terms: set[str]) -> list[str]:
+    return sorted(term for term in terms if contains_term(text, term))
 
 
 def lead_source_url(element: dict[str, Any]) -> str:
@@ -327,8 +416,6 @@ def classify(tags: dict[str, Any], name: str) -> tuple[str, str, list[str], list
         return "Heavy construction materials manufacturing", "Heavy manufacturing", products, pain
     if "chemical" in text or "paint" in text or "pharma" in text or "fertilizer" in text:
         return "Chemical and process manufacturing", "Chemical factory", products, pain
-    if "food" in text or "dairy" in text or "beverage" in text:
-        return "Food and beverage manufacturing", "Factory", products, pain
     if "textile" in text or "spinning" in text or "weaving" in text:
         return "Textile manufacturing", "Factory", products, pain
     if "electrical" in text or "panel" in text or "power" in text:
@@ -340,11 +427,11 @@ def classify(tags: dict[str, Any], name: str) -> tuple[str, str, list[str], list
 
 def score(tags: dict[str, Any], name: str, products: list[str]) -> tuple[int, dict[str, int], str, str]:
     text = " ".join([name] + [clean(value) for value in tags.values()]).lower()
-    term_hits = sum(1 for term in INDUSTRIAL_TERMS if term in text)
+    term_hits = len(matching_terms(text, STRONG_INDUSTRIAL_TERMS))
     has_contact = any(tags.get(key) for key in ["phone", "contact:phone", "email", "contact:email", "website", "contact:website"])
     has_website = bool(tags.get("website") or tags.get("contact:website"))
-    is_factory = tags.get("man_made") == "works" or tags.get("building") == "industrial" or "factory" in text or "plant" in text
-    is_construction = tags.get("office") == "construction" or any(term in text for term in CONSTRUCTION_TERMS)
+    is_factory = tags.get("man_made") == "works" or tags.get("building") == "industrial" or contains_term(text, "factory") or contains_term(text, "plant")
+    is_construction = tags.get("office") == "construction" or bool(matching_terms(text, CONSTRUCTION_TERMS))
 
     breakdown = {
         "industryFit": min(20, 11 + term_hits + (4 if is_factory else 0) + (3 if is_construction else 0)),
@@ -370,31 +457,36 @@ def eligible(element: dict[str, Any]) -> bool:
     if len(name) < 3:
         return False
     text = tags_text(tags) + " " + name.lower()
-    if any(bad in text for bad in ["mosque", "church", "school", "restaurant", "cafe", "pharmacy", "hotel", "bank", "clinic"]):
+    if any(marker in name for marker in ["Ø", "Ù", "â€", "ï¿½", "�"]):
         return False
-    useful_shop = tags.get("shop") in {
-        "trade",
-        "hardware",
-        "doityourself",
-        "car_repair",
-        "car_parts",
-        "furniture",
-        "electronics",
-        "appliance",
-        "computer",
-    }
-    return (
-        tags.get("man_made") == "works"
-        or tags.get("building") == "industrial"
-        or tags.get("landuse") == "industrial"
-        or tags.get("office") == "company"
-        or tags.get("office") == "construction"
-        or useful_shop
-        or sum(1 for term in INDUSTRIAL_TERMS if term in text) >= 1
-    )
+    if matching_terms(text, FOOD_AND_HOSPITALITY_TERMS | IRRELEVANT_TERMS):
+        return False
+    if tags.get("amenity") in {"restaurant", "cafe", "fast_food", "food_court", "bar", "pub"}:
+        return False
+    if tags.get("shop") in {"bakery", "convenience", "supermarket", "deli", "mall", "furniture"}:
+        return False
+    if tags.get("tourism") or tags.get("cuisine"):
+        return False
+    if not any(tags.get(key) for key in ("website", "contact:website", "phone", "contact:phone", "email", "contact:email")):
+        return False
+
+    strong_hits = matching_terms(text, STRONG_INDUSTRIAL_TERMS)
+    factory_tag = tags.get("man_made") == "works" or tags.get("building") == "industrial"
+    specific_industry_tag = bool(tags.get("industrial") and tags.get("industrial") not in {"yes", "area"})
+    construction_tag = tags.get("office") == "construction"
+
+    # A generic industrial land polygon or company office is not a company lead.
+    # Factory tags still require a named industrial clue; contractors require two.
+    if factory_tag:
+        return len(strong_hits) >= 1
+    if specific_industry_tag:
+        return len(strong_hits) >= 1
+    if construction_tag:
+        return len(strong_hits) >= 2
+    return len(strong_hits) >= 2
 
 
-def to_lead(element: dict[str, Any], index: int) -> dict[str, Any]:
+def to_lead(element: dict[str, Any]) -> dict[str, Any]:
     tags = element.get("tags", {})
     name = clean(tags.get("name:en") or tags.get("name"))
     industry, segment, products, pain = classify(tags, name)
@@ -443,67 +535,82 @@ def to_lead(element: dict[str, Any], index: int) -> dict[str, Any]:
         "suggestedPitch": f"Lead with {pitch_products}, framed around uptime, utility reliability, and project delivery for their {industry.lower()} operation.",
         "nextAction": "Verify the listed source, identify procurement or maintenance contact, then send a short Atta capability message.",
         "expectedValue": expected_value,
-        "lastVerified": "2026-06-06",
+        "lastVerified": "2026-07-08",
     }
 
 
-def ts_string(value: Any, indent: int = 0) -> str:
-    spacing = " " * indent
-    if isinstance(value, str):
-        return json.dumps(value, ensure_ascii=False)
-    if isinstance(value, bool):
-        return "true" if value else "false"
-    if isinstance(value, (int, float)):
-        return str(value)
-    if isinstance(value, list):
-        return "[" + ", ".join(ts_string(item, indent) for item in value) + "]"
-    if isinstance(value, dict):
-        parts = []
-        for key, item in value.items():
-            parts.append(f"{json.dumps(key)}: {ts_string(item, indent + 2)}")
-        return "{ " + ", ".join(parts) + " }"
-    return "null"
+def verified_leads() -> list[dict[str, Any]]:
+    sources = json.loads(VERIFIED_SOURCES_PATH.read_text(encoding="utf-8"))
+    leads: list[dict[str, Any]] = []
+    for source in sources:
+        products = source["products"]
+        breakdown = {
+            "industryFit": 20,
+            "productFit": 19,
+            "locationFit": 15,
+            "contactability": 15 if source.get("email") or source.get("phone") else 12,
+            "companySignal": 17,
+            "sourceConfidence": 8,
+        }
+        score = sum(breakdown.values())
+        leads.append({
+            "id": f"verified-{slugify(source['name'])}",
+            "companyName": source["name"],
+            "industry": source["industry"],
+            "segment": source["segment"],
+            "governorate": source["governorate"],
+            "city": source["city"],
+            "industrialZone": source["zone"],
+            "address": source["zone"],
+            "website": source["url"],
+            "phone": source.get("phone", "Verify on official website"),
+            "email": source.get("email", "Verify on official website"),
+            "sourceName": "Official company website",
+            "sourceUrl": source["url"],
+            "sourceType": "Official website",
+            "productsToPitch": products,
+            "fitScore": score,
+            "scoreBreakdown": breakdown,
+            "confidence": "High",
+            "whyGoodFit": f"{source['name']} operates a verified {source['industry'].lower()} business with clear demand for industrial power, utilities, projects, or maintenance.",
+            "painSignals": source["pain"],
+            "suggestedPitch": "Lead with the most relevant power, utility, maintenance, or project package and reference the company's verified industrial operations.",
+            "nextAction": "Review the official website, identify procurement or plant engineering leadership, and send a tailored Atta capability message.",
+            "expectedValue": "Strategic" if score >= 93 else "High",
+            "lastVerified": "2026-07-08",
+        })
+    return leads
 
 
-def write_ts(leads: list[dict[str, Any]]) -> None:
+def write_json(leads: list[dict[str, Any]]) -> None:
     OUTPUT_PATH.parent.mkdir(parents=True, exist_ok=True)
-    lines = [
-        'import type { AttaLead } from "./atta-leads";',
-        "",
-        "// Generated by scripts/generate_atta_osm_leads.py from public OpenStreetMap/Overpass data.",
-        "export const generatedAttaLeads: AttaLead[] = [",
-    ]
-    for lead in leads:
-        lines.append("  {")
-        for key, value in lead.items():
-            lines.append(f"    {key}: {ts_string(value, 4)},")
-        lines.append("  },")
-    lines.append("];")
-    OUTPUT_PATH.write_text("\n".join(lines) + "\n", encoding="utf-8")
+    OUTPUT_PATH.write_text(json.dumps(leads, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
 
 
 def main() -> int:
     parser = argparse.ArgumentParser()
-    parser.add_argument("--limit", type=int, default=300)
+    parser.add_argument("--limit", type=int, default=100)
     parser.add_argument("--force", action="store_true")
+    parser.add_argument("--offline", action="store_true", help="Use verified sources and existing OSM cache without network calls")
     args = parser.parse_args()
 
-    data = fetch_overpass(force=args.force)
+    data = fetch_overpass(force=args.force, offline=args.offline)
     elements = [element for element in data.get("elements", []) if eligible(element)]
-    leads = [to_lead(element, index) for index, element in enumerate(elements)]
+    leads = verified_leads() + [to_lead(element) for element in elements]
     deduped: dict[str, dict[str, Any]] = {}
     for lead in leads:
         key = re.sub(r"[^a-z0-9]+", "", lead["companyName"].lower())
         if key and (key not in deduped or lead["fitScore"] > deduped[key]["fitScore"]):
             deduped[key] = lead
     ranked = sorted(deduped.values(), key=lambda item: item["fitScore"], reverse=True)[: args.limit]
-    if len(ranked) < args.limit:
-        raise RuntimeError(f"Only generated {len(ranked)} eligible leads; requested {args.limit}.")
+    rejected = [lead["companyName"] for lead in ranked if matching_terms(lead["companyName"].lower(), FOOD_AND_HOSPITALITY_TERMS)]
+    if rejected:
+        raise RuntimeError(f"Food/hospitality leads passed validation: {rejected}")
 
     REPORT_PATH.parent.mkdir(parents=True, exist_ok=True)
     REPORT_PATH.write_text(json.dumps(ranked, ensure_ascii=False, indent=2), encoding="utf-8")
     try:
-        write_ts(ranked)
+        write_json(ranked)
         print(f"Wrote {OUTPUT_PATH}")
     except PermissionError as exc:
         print(f"Skipped writing {OUTPUT_PATH}: {exc}")
